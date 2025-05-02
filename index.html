@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermercado</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-supermercado">
+            <img src="./imagenes/logo.png" alt="Logo del supermercado">
+        </div>
+        <div class="busqueda">
+            <input type="text1" placeholder="  Buscar productos..." class="caja-busqueda">
+            <button class="boton-busqueda">Buscar</button>
+        </div>
+        <div class="cuenta-carrito">
+            <span>Mi cuenta</span>
+            <span>Carrito (S/ 0.00)</span>
+        </div>
+    </header>
+
+    <!-- Guia para usar el carrusel inspirado en codigo hecho por Albert Escamilla-->
+    <!-- Carrusel de imágenes -->
+    <section class="carousel">
+        <div class="carousel-container">
+            <!-- Controles de radio para la navegación -->
+            <input type="radio" name="carousel" id="slide1" checked>
+            <input type="radio" name="carousel" id="slide2">
+            <input type="radio" name="carousel" id="slide3">
+            
+            <!-- Imágenes del carrusel -->
+            <div class="carousel-images">
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1580501170961-bb0dbf63a6df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2970&q=80" alt="Imagen 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1580501170888-80668882ca0c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80" alt="Imagen 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1572508589584-94d778209dd9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80" alt="Imagen 3">
+                </div>
+            </div>
+
+            <!-- Controles para navegar entre las imágenes -->
+            <div class="carousel-controls">
+                <label for="slide1" class="control-button"></label>
+                <label for="slide2" class="control-button"></label>
+                <label for="slide3" class="control-button"></label>
+            </div>
+        </div>
+    </section>
+    <div class="navegador">
+        <nav>
+            <ul>
+                <div class="nav-div">
+                    <img src="./imagenes/Navegador/Inicio.png" alt="Logo" class="img-nav">
+                    <li><a href="index.html">Inicio</a></li>
+                </div>
+                <div class="nav-div">
+                    <img src="./imagenes/Navegador/Cervezas.jpg" alt="Imagen de Cervezas" class="img-nav">
+                    <li><a href="#">Cervezas</a></li>
+                </div>
+                <div class="nav-div">
+                    <img src="./imagenes/Navegador/Licores.jpg" alt="Imagen de Licores" class="img-nav">
+                    <li><a href="#">Licores</a></li> 
+                </div>
+                <div class="nav-div">
+                    <img src="./imagenes/Navegador/Comidas.jpg" alt="Imagen de una hamburguesa" class="img-nav">
+                    <li><a href="#">Comidas</a></li>
+                </div>
+                <div class="nav-div">
+                    <img src="./imagenes/Navegador/Bebidas.jpg" alt="Imagen de Gaseosas" class="img-nav">
+                    <li><a href="#">Bebidas</a></li>
+                </div>
+                <div class="nav-div">
+                    <img src="./imagenes/Navegador/Antojos.jpg" alt="Imagen de Chocolates" class="img-nav">
+                    <li><a href="#">Antojos</a></li>   
+                </div>
+                <div class="nav-div">
+                    <img src="./imagenes/Navegador/Helados.jpg" alt="Imagen de un bote de helado" class="img-nav">
+                    <li><a href="#">Helados</a></li>
+                </div>
+                <div class="nav-div">
+                    <img src="./imagenes/Navegador/Despensa.jpg" alt="Imagen de Aceites" class="img-nav">
+                    <li><a href="#">Despensa</a></li>
+                </div>
+                <div class="nav-div">
+                    <img src="./imagenes/Navegador/Promociones.jpg" alt="Imagen de varios productos" class="img-nav">
+                <li><a href="#">Promociones</a></li>
+                </div>
+            </ul>
+        </nav>
+
+    </div>
+
+    <main>
+        <div class="contenido-main">
+
+            <!-- Sección de Cervezas -->
+
+            <p class="titulos">Cervezas</p>
+            <section class="productos-destacados">
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Cervezas1.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Cerveza Tres Cruces Lager Six Pack Lata 355ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 24.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Cervezas2.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Cerveza De Malta Y Maiz Dragenburg Sixpack 310 Ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 18.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Cervezas3.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Cerveza Coronita Six Pack Botella 210 ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 20.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Cervezas4.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Cerveza Heineken Fourpack Lata 473 ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 27.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Cervezas5.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Cerveza Tres Cruces Light Six Pack Lata X 310 Ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 23.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Cervezas6.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Cerveza Pilsen Callao Six Pack Lata 355 ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 28.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/producto1.png" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Gaseosa Coca Cola Regular Lata 350ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 5.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+            </section>
+
+            <!-- Sección de Licores -->
+
+            <p class="titulos">Licores</p>
+            <section class="productos-destacados">
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Licores1.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack 2 Cartavio Añejo Black 1L</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 72.00</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Licores2.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack 2 Ron Black Barrel 1L</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 91.00</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Licores3.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack 2 Ron Cartavio Añejo Black 750ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 62.00</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Licores4.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack 2 Vodka Russkaya Apple 750ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 53.80</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Licores5.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Ron Cartavio Black 1 L</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 34.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Licores6.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Ron Cartavio Black 750 ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 29.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/producto1.png" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Gaseosa Coca Cola Regular Lata 350ml</p>
+                        
+                        <div class="price-container">
+                            <span class="precio">S/ 5.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+            </section>
+
+            <!-- Sección de Comidas -->
+
+            <p class="titulos">Comidas</p>
+            <section class="productos-destacados">
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Comidas1.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Hamburguesa Prime de Cerdo Miel de Maple 1 und</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 12.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Comidas2.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (3 Empanada De Carne + 3 Empanada De Pollo + 1 Coca Cola x 1 Lt)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 25.60</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Comidas3.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Sandwich Prime Pulled Pork</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 12.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Comidas4.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Hamburguesa Prime de Res Tocino Queso 1 und</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 12.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Comidas5.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (5 Empanada De Carne + 5 Empanada De Pollo + 1 Coca Cola x 1 Lt)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 39.20</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Comidas6.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (10 Empanada De Carne)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 34.00</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/producto1.png" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Gaseosa Coca Cola Regular Lata 350ml</p>
+                        
+                        <div class="price-container">
+                            <span class="precio">S/ 5.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+            </section>
+
+            <!-- Sección de Bebidas -->
+
+            <p class="titulos">Bebidas</p>
+            <section class="productos-destacados">
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Bebidas1.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (1 Rehidratante Life SOS Recovery Sabor Tropical + 1 Rehidratante Life SOS Relax Sabor Mix de Frutas) Lata 355ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 11.80</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Bebidas2.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (2 Coca Cola x 1 Lt)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 10.40</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Bebidas3.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (3 Schweppes Ginger Ale x 1.5 Lt)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 23.70</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Bebidas4.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (4 Coca Cola x 1 Lt)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 20.80</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Bebidas5.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (4 Inca Kola x 1 Lt)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 20.80</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Bebidas6.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (2 Energizante Red Bull Sugar Free x 250 Ml)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 17.00</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/producto1.png" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Gaseosa Coca Cola Regular Lata 350ml</p>
+                        
+                        <div class="price-container">
+                            <span class="precio">S/ 5.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+            </section>
+
+            <!-- Sección de Antojos -->
+
+            <p class="titulos">Antojos</p>
+            <section class="productos-destacados">
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Antojos1.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (2 Inka Chips Jalapeño x 135 Gr)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 17.80</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Antojos2.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (2 Inka Chips Queso Y Cebolla x 135 Gr)
+                        </p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 17.80</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Antojos3.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack 1 (Keke Pinguino Marinela Cookies Cream 80gr + Keke Pinguino Marinela Triple Chocolate 80gr)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 8.00</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Antojos4.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack 2 (Papas Kona Select Original 100 Gr)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 15.80</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Antojos5.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (2 Papas Jappy Snacks BBQ 200 gr)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 15.80</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Antojos6.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (2 Papas Jappy Snacks Jalapeño 200 gr)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 15.80</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/producto1.png" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Gaseosa Coca Cola Regular Lata 350ml</p>
+                        
+                        <div class="price-container">
+                            <span class="precio">S/ 5.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+            </section>
+
+            <!-- Sección de Helados -->
+
+            <p class="titulos">Helados</p>
+            <section class="productos-destacados">
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Helados1.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Helado grand Prix Bombones 216 ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 15.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Helados2.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Helado Donofrio Peziduri Tricolor Cremoso 900 ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 15.99</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Helados3.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Helado Donofrio Peziduri Chocochips Cremoso 900 ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 15.99</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Helados4.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Helado Donofrio Peziduri Vainilla Cremoso 900 ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 15.99</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Helados5.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Helado Gelático Chocobrownie 450ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 7.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Helados6.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Helado Gelatico Chocochips 930 ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 10.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/producto1.png" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Gaseosa Coca Cola Regular Lata 350ml</p>
+                        
+                        <div class="price-container">
+                            <span class="precio">S/ 5.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+            </section>
+
+            <!-- Sección de Despensa -->
+
+            <p class="titulos">Despensa</p>
+            <section class="productos-destacados">
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Despensa1.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (2 Huevo Pardo La Calera x 15 Und)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 23.80</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Despensa2.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (3 Bebida Láctea Uht Gloria Pro Triple Zero Chocolate 320 Ml)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 18.00</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Despensa3.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Keke Bimbo Marmoleado Familiar 380 gr</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 10.50</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Despensa4.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Keke Bimbo Naranja Familiar 380 gr</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 10.50</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Despensa5.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Leche UHT Gloria Entera 1 L</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 5.70</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Despensa6.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Bebida Láctea Pro UHT Chocolate 320 ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 5.80</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/producto1.png" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Gaseosa Coca Cola Regular Lata 350ml</p>
+                        
+                        <div class="price-container">
+                            <span class="precio">S/ 5.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+            </section>
+
+            <p class="titulos">Promociones</p>
+            <section class="productos-destacados">
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Promociones1.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Jelly Shots Four Loko Surtido 8 und</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 5.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Promociones2.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (2 Jelly Shots Four Loko Surtido x 8 Und)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 10.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Promociones3.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (1 Rehidratante Life SOS Recovery Sabor Tropical + 1 Rehidratante Life SOS Relax Sabor Mix de Frutas) Lata 355ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 9.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Promociones4.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Helado grand Prix Bombones 216 ml</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 11.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Promociones5.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (1 Evervess x 1.5 Lt + 1 Vodka Smirnoff Raspberry x 700 Ml + 1 Hielo 1.5 Kg)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 51.80</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/Promociones6.webp" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Pack (2 Rtd Smirnoff Ice Green Apple Botella 355 ml)</p>
+
+                        <div class="price-container">
+                            <span class="precio">S/ 13.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+
+                    <div class="producto">
+                        <img src="./imagenes/Productos/producto1.png" alt="Producto 1" />
+
+                        <p class="producto-descripcion">Gaseosa Coca Cola Regular Lata 350ml</p>
+                        
+                        <div class="price-container">
+                            <span class="precio">S/ 5.90</span>
+                            <button class="button-add" aria-label="Añadir">+</button>
+                        </div>
+                    </div>
+            </section>
+        </div>
+        
+    </main>
+
+    <footer>
+        <div class="info">
+            <div class="contenido-info">
+                <div class="contenido-infodiv">
+                    <img src="./imagenes/Navegador/Inicio.png" alt="Logo del supermercado" class="img-footer">
+                </div>
+                <div class="contenido-infodiv">
+                    <h3>Contáctanos</h3>
+                    <p>Teléfono: (01) 234-5678</p>
+                    <p>Email: 
+                </div>
+                <div class="contenido-infodiv">
+                    <h3>Redes Sociales</h3>
+                    <a href="#" class="textRedes">Facebook</a>
+                    <a href="#" class="textRedes">Instagram</a>
+                    <a href="#" class="textRedes">Twitter</a>
+                </div>
+                <div class="contenido-infodiv">
+                    <h3>Ubicación</h3>
+                    <p>Avenida Principal 123, Ciudad</p>
+                    <p>Horario: Lunes a Sábado, 8:00 AM - 9:00 PM</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="contenido-pie">
+            <p>&copy; 2025 Supermercado - Todos los derechos reservados</p>
+            <div class="enlaces-pie">
+                <a href="#">Política de privacidad</a>
+                <a href="#">Términos de servicio</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

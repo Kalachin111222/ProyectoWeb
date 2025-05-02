@@ -1,0 +1,354 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Poppins, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #0d47a1;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+header .logo-supermercado img {
+    height: 50px;
+    width: auto;
+}
+
+header .busqueda input {
+    padding: 5px;
+    font-size: 16px;
+    margin: 10px;
+}
+
+header .busqueda button {
+    padding: 5px 10px;
+    background-color: #ffab00;
+    border: none;
+    color: white;
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+    font-weight: semi-bold;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+header .caja-busqueda {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 800px;
+    height: 35px;
+}
+
+header .boton-busqueda {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    height: 35px;
+}
+
+header .cuenta-carrito span {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+nav {
+    background-color: #ffffff;
+    border-bottom: 2px solid #eeeeee;
+}
+
+.navegador{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 25px;
+
+}
+
+nav ul {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    list-style-type: none;
+    padding: 10px;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #0d47a1;
+    font-weight: bold;
+}
+
+nav .img-nav{
+    height: 100px;
+    width: 100px;
+}
+
+nav .nav-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+}
+main {
+    padding: 20px;
+    background-color: #e8e8e8;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+main .contenido-main{
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+main .titulos{
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight:600;
+    color: #0d47a1;
+}
+
+main .productos-destacados {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+    
+}
+
+main .producto {
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+main .producto img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 4px;
+}
+
+main .producto-descripcion {
+    font-size: 16px;
+    color: #000;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left; /* Justificado a la izquierda */
+}
+
+main .price-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+main .precio {
+    font-size: 16px;
+    color: #000;
+}
+
+main .button-add {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ffab00;
+    padding: 0;
+}
+
+main .producto button {
+    padding: 10px;
+    background-color: #ffab00;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    margin-bottom: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Carrusel de imágenes */
+.carousel {
+    width: 100%;
+    height: 400px; /* Ajusta la altura del carrusel */
+    overflow: hidden;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-images {
+    display: flex;
+    width: 300%; /* Ancho de 300% porque tenemos 3 imágenes */
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    width: 100vw;  /* Cada imagen ocupa el 100% del ancho de la pantalla */
+    height: 100%;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Controles de radio para navegar entre las imágenes */
+input[type="radio"] {
+    display: none;
+}
+
+.carousel-controls {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.control-button {
+    background-color: #ffab00;
+    border: none;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Movimiento de las imágenes */
+input#slide1:checked ~ .carousel-images {
+    transform: translateX(0);
+}
+
+input#slide2:checked ~ .carousel-images {
+    transform: translateX(-33.33%);
+}
+
+input#slide3:checked ~ .carousel-images {
+    transform: translateX(-66.66%);
+}
+
+footer {
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    
+}
+
+footer .img-footer{
+    height: 200px;
+    width: 200px;
+}
+
+footer .enlaces-pie a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+footer .enlaces-pie a:hover {
+    text-decoration: underline;
+}
+
+footer .enlaces-pie {
+    display: block;
+    margin-top: 10px;
+}
+
+footer .info {
+    padding-left: 300px;
+    padding-right: 300px;
+    margin-bottom: 100px;
+    margin-top: 100px;
+}
+
+footer .contenido-pie{
+    background-color: #0d47a1;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .contenido-info{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 20px;
+    gap: 50px;
+}
+footer .contenido-infodiv {
+    margin: 10px;
+    display:flex;
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+    text-align: left;
+    font-size: 14px;
+}
+
+footer .textRedes {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    .productos-destacados {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .producto {
+        padding: 10px;
+    }
+}
+
