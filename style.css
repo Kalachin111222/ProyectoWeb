@@ -593,8 +593,10 @@ footer .textRedes {
 @media (max-width: 576px) {
 
     .control-button {
-        width: 18px;
-        height: 18px;
+        width: 14px;
+        height: 14px;
+        margin-bottom: 5px;
+
     }
     
     header .cuenta-carrito{
@@ -653,7 +655,7 @@ footer .textRedes {
         margin: 5px 0;
     }
     .carousel{
-        height: 350px;
+        height: auto;
     }
 
     main .contenido-nosotros {
@@ -685,10 +687,6 @@ footer .textRedes {
     
     main .productos-destacados {
         grid-template-columns: 1fr 1fr;
-    }
-    
-    .carousel {
-        height: 300px;
     }
 
     .contenedor-migas {
