@@ -392,8 +392,8 @@ input[type="radio"] {
 .control-button {
     background-color: #0d47a1;
     border: none;
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     margin: 0 5px;
     border-radius: 50%;
     cursor: pointer;
@@ -591,6 +591,11 @@ footer .textRedes {
 }
 
 @media (max-width: 576px) {
+
+    .control-button {
+        width: 18px;
+        height: 18px;
+    }
     
     header .cuenta-carrito{
         font-size: 14px;
