@@ -339,6 +339,16 @@ main .formulario-contacto{
     object-fit: cover;
 }
 
+/* Mostrar las imágenes grandes por defecto */
+.carousel-item.big-image {
+    display: block;
+}
+
+.carousel-item.small-image {
+    display: none; /* Ocultar las imágenes pequeñas por defecto */
+}
+
+
 /* Controles de radio para navegar entre las imágenes */
 input[type="radio"] {
     display: none;
@@ -409,7 +419,7 @@ footer .enlaces-pie {
 
 footer .info {
     padding: 0 20px;
-    margin-bottom: 50px;
+    margin-bottom: 150px;
     margin-top: 50px;
 }
 
@@ -447,7 +457,6 @@ footer .textRedes {
     margin-top: 10px;
 }
 
-/* Media queries para responsividad */
 @media (max-width: 1200px) {
     main .contenido-main {
         padding: 0 20px;
@@ -456,6 +465,27 @@ footer .textRedes {
     footer .contenido-info {
         grid-template-columns: repeat(2, 1fr);
     }
+    .carousel{
+        height: auto;
+    }
+}
+
+@media (max-width: 1024px) {
+    /* Mostrar las imágenes pequeñas en pantallas más pequeñas */
+    .carousel-item.big-image {
+        display: none; /* Ocultar las imágenes grandes */
+    }
+
+    .carousel-item.small-image {
+        display: block; /* Mostrar las imágenes pequeñas */
+    }
+    .carousel-item img {
+        height: auto; 
+    }
+    .carousel{
+        height: 650px;
+    }
+    
 }
 
 @media (max-width: 992px) {
@@ -466,8 +496,11 @@ footer .textRedes {
     main .productos-destacados {
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     }
-    
-    .carousel {
+    .carousel-item img {
+        height: auto; 
+    }
+    .carousel{
+        height: 600px;
     }
 }
 
@@ -520,8 +553,15 @@ footer .textRedes {
         align-items: center;
         text-align: center;
     }
-    
-    .carousel {
+
+    .carousel{
+        height: 500px;
+    }
+}
+
+@media (max-width: 700px) {
+    .carousel{
+        height: 400px;
     }
 }
 
@@ -574,9 +614,8 @@ footer .textRedes {
     footer .enlaces-pie a {
         margin: 5px 0;
     }
-    
-    .carousel {
-        height: 300px;
+    .carousel{
+        height: 350px;
     }
 }
 
@@ -607,7 +646,7 @@ footer .textRedes {
     }
     
     .carousel {
-        height: 200px;
+        height: 300px;
     }
 
     .contenedor-migas {
@@ -684,7 +723,6 @@ footer .textRedes {
     resize: vertical;
 }
 
-/* Estilo de los botones */
 .botones {
     display: flex;
     justify-content: space-between;
