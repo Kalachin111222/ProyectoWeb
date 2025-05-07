@@ -392,8 +392,8 @@ input[type="radio"] {
 .control-button {
     background-color: #0d47a1;
     border: none;
-    width: 10px;
-    height: 10px;
+    width: 18px;
+    height: 18px;
     margin: 0 5px;
     border-radius: 50%;
     cursor: pointer;
@@ -591,6 +591,14 @@ footer .textRedes {
 }
 
 @media (max-width: 576px) {
+    
+    header .cuenta-carrito{
+        font-size: 14px;
+    }
+
+    header .caja-busqueda{
+        font-size: 14px;
+    }
 
     .contenedor-migas {
         padding: 8px 10px;
@@ -787,4 +795,115 @@ footer .textRedes {
 .reset-btn:hover {
     background-color: #e53935;
     transform: translateY(-3px);
+}
+
+
+
+/* Menu Hamburguesa*/
+.hamburger-menu {
+    display: none;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.hamburger-icon {
+    width: 35px;
+    height: 35px;
+    background-color: #0d47a1;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.hamburger-icon span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 2px 0;
+    transition: all 0.3s ease;
+}
+
+.menu-checkbox {
+    display: none;
+}
+
+/* Estilos actualizados para la navegación */
+.navegador {
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 576px) {
+    .hamburger-menu {
+        display: block;
+    }
+    
+    .navegador {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 250px;
+        height: 100vh;
+        background-color: white;
+        z-index: 999;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        transition: left 0.3s ease;
+        margin: 0;
+        padding-top: 250px;
+        overflow-y: auto;
+    }
+    
+    .menu-checkbox:checked ~ .navegador {
+        left: 0;
+    }
+    
+    .menu-checkbox:checked + .hamburger-menu .hamburger-icon span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .menu-checkbox:checked + .hamburger-menu .hamburger-icon span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .menu-checkbox:checked + .hamburger-menu .hamburger-icon span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+    
+    nav ul {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: 1fr;
+        padding: 0;
+    }
+    
+    nav .nav-div {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    
+    nav .img-nav {
+        height: 80px;
+        width: 80px;
+    }
+    
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+    }
+    
+    .menu-checkbox:checked ~ .overlay {
+        display: block;
+    }
 }
