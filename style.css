@@ -1,3 +1,27 @@
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #e8e8e8;
+    --bg-card: #ffffff;
+    --text-primary: #000000;
+    --text-secondary: #666666;
+    --border-color: #eeeeee;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --text-producto: #0d47a1;
+    --color-header: #0d47a1;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-card: #61616169;
+    --text-primary: #E0E0E0;
+    --text-secondary: #cccccc;
+    --border-color: #444444;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --text-producto: #E0E0E0;
+    --color-header: #0d48a169;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,6 +34,23 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    padding-top: 80px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--color-header); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 header {
@@ -79,8 +120,8 @@ header .cuenta-carrito span {
 }
 
 nav {
-    background-color: #ffffff;
-    border-bottom: 2px solid #eeeeee;
+    background-color: var(--bg-primary);
+    border-bottom: 2px solid var(--border-color);
 }
 
 .navegador {
@@ -90,9 +131,10 @@ nav {
     margin-top: 25px;
     margin-bottom: 50px;
     overflow-x: auto;
+    transition: all 0.3s ease;
 }
 
-nav .separador{
+nav .separador {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -115,20 +157,14 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #0d47a1;
-    font-weight: bold;
+    color: var(--text-producto);;
+    font-weight: 600;
 }
 
 nav .img-nav {
     height: 115px;
     width: 115px;
     object-fit: contain;
-}
-
-nav .separador {
-    color:#0d47a1;
-    display: flex;
-    justify-content: center;
 }
 
 nav .nav-div {
@@ -141,8 +177,8 @@ nav .nav-div {
 
 .contenedor-migas {
     padding: 15px 20px;
-    background-color: #fff;
-    border-bottom: 1px solid #eeeeee;
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
     max-width: 1200px;
     margin: 0 auto;
     margin-top: 10px;
@@ -158,7 +194,7 @@ nav .nav-div {
 }
 
 .item-migas {
-    color: #666;
+    color: var(--text-secondary);
     text-decoration: none;
 }
 
@@ -178,7 +214,7 @@ nav .nav-div {
 
 main {
     padding: 20px;
-    background-color: #e8e8e8;
+    background-color: var(--bg-secondary);
     display: flex;
     flex-grow: 1;
     flex-direction: column;
@@ -195,7 +231,7 @@ main .titulos {
     margin-bottom: 30px;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    color: #0d47a1;
+    color: var(--text-producto);
 }
 
 main .productos-destacados {
@@ -213,11 +249,11 @@ main .productos-totales {
 }
 
 main .producto {
-    background-color: white;
+    background-color: var(--bg-card);
     padding: 10px;
     text-align: center;
     border-radius: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px var(--shadow);
     display: flex;
     flex-direction: column;
 }
@@ -233,7 +269,7 @@ main .producto img {
 
 main .producto-descripcion {
     font-size: 16px;
-    color: #000;
+    color: var(--text-primary);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -252,7 +288,7 @@ main .price-container {
 
 main .precio {
     font-size: 16px;
-    color: #000;
+    color: var(--text-primary);
     font-weight: bold;
 }
 
@@ -298,14 +334,12 @@ main .form-container {
     padding: 100px;
 }
 
-main .formulario-contacto{
+main .formulario-contacto {
     display: flex;
-    background-color: #fff;
+    background-color: var(--bg-card);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
-
 }
 
 main .contenido-nosotros {
@@ -315,7 +349,7 @@ main .contenido-nosotros {
     gap: 20px;
 }
 
-main .img-nosotros{
+main .img-nosotros {
     width: 100%;
     height: auto;
     max-width: 500px;
@@ -323,21 +357,23 @@ main .img-nosotros{
 
 main .texto-nosotros {
     font-size: 18px;
-    color: #000;
+    color: var(--text-primary);
     text-align: justify;
     padding: 20px;
 }
+
 main .texto-nosotros h2 {
     font-size: 24px;
     color: #0d47a1;
     margin-bottom: 20px;
 }
 
-/* Carrusel de imágenes */
 .carousel {
     width: 100%;
     height: 400px;
     overflow: hidden;
+    position: relative;
+    margin-bottom: 25px;
 }
 
 .carousel-container {
@@ -351,352 +387,112 @@ main .texto-nosotros h2 {
     display: flex;
     width: 300%;
     height: 100%;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .carousel-item {
-    width: 100vw;
+    width: 33.333%;
     height: 100%;
+    position: relative;
+    overflow: hidden;
 }
 
 .carousel-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
-/* Mostrar las imágenes grandes por defecto */
-.carousel-item.big-image {
-    display: block;
+.carousel-item:hover img {
+    transform: scale(1.05);
 }
 
-.carousel-item.small-image {
-    display: none; /* Ocultar las imágenes pequeñas por defecto */
-}
-
-
-/* Controles de radio para navegar entre las imágenes */
-input[type="radio"] {
-    display: none;
-}
-
-.carousel-controls {
+.carousel-nav {
     position: absolute;
-    bottom: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(13, 71, 161, 0.8);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.carousel-nav:hover {
+    background: rgba(13, 71, 161, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-nav.prev {
+    left: 20px;
+}
+
+.carousel-nav.next {
+    right: 20px;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    gap: 15px;
+    z-index: 10;
 }
 
-.control-button {
-    background-color: #0d47a1;
-    border: none;
-    width: 14px;
-    height: 14px;
-    margin: 0 5px;
+.indicator {
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
     cursor: pointer;
-}
-
-/* Movimiento de las imágenes */
-input#slide1:checked ~ .carousel-images {
-    transform: translateX(0);
-}
-
-input#slide2:checked ~ .carousel-images {
-    transform: translateX(-33.33%);
-}
-
-input#slide3:checked ~ .carousel-images {
-    transform: translateX(-66.66%);
-}
-
-footer {
-    text-align: center;
     position: relative;
-    bottom: 0;
-    width: 100%;
+    transition: all 0.3s ease;
+    overflow: hidden;
 }
 
-footer .img-footer {
-    height: 150px;
-    width: 150px;
+.indicator:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
 }
 
-footer .enlaces-pie a {
-    color: white;
-    margin-left: 20px;
-    text-decoration: none;
+.indicator.active {
+    width: 40px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.8);
 }
 
-footer .enlaces-pie a:hover {
-    text-decoration: underline;
+.progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ffab00, #0d47a1);
+    border-radius: inherit;
+    transition: width 0.1s linear;
 }
 
-footer .enlaces-pie {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 10px;
-    gap: 10px;
+.indicator.active .progress-bar {
+    animation: progressFill 0.02s linear forwards;
 }
 
-footer .info {
-    padding: 0 20px;
-    margin-bottom: 150px;
-    margin-top: 50px;
+@keyframes progressFill {
+    from { width: 0%; }
+    to { width: 100%; }
 }
 
-footer .contenido-pie {
-    background-color: #0d47a1;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-footer .contenido-info {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-footer .contenido-infodiv {
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    color: rgb(0, 0, 0);
-    text-align: left;
-    font-size: 14px;
-}
-
-footer .textRedes {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    display: block;
-    margin-top: 10px;
-}
-
-@media (max-width: 1200px) {
-    main .contenido-main {
-        padding: 0 20px;
-    }
-    
-    footer .contenido-info {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .carousel{
-        height: auto;
-    }
-}
-
-@media (max-width: 1024px) {
-    /* Mostrar las imágenes pequeñas en pantallas más pequeñas */
-    .carousel-item.big-image {
-        display: none; /* Ocultar las imágenes grandes */
-    }
-
-    .carousel-item.small-image {
-        display: block; /* Mostrar las imágenes pequeñas */
-    }
-    .carousel-item img {
-        height: auto; 
-    }
-    .carousel{
-        height: 650px;
-    }
-    
-}
-
-@media (max-width: 992px) {
-    nav ul {
-        grid-template-columns: repeat(5, 1fr);
-    }
-    
-    main .productos-destacados {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    }
-    .carousel-item img {
-        height: auto; 
-    }
-    .carousel{
-        height: 600px;
-    }
-}
-
-@media (max-width: 768px) {
-
-    .contenedor-migas {
-        padding: 10px 15px;
-    }
-    
-    .nav-migas {
-        font-size: 14px;
-    }
-    
-    header {
-        flex-direction: column;
-        padding: 10px;
-    }
-    
-    header .busqueda {
-        width: 100%;
-        margin: 10px 0;
-    }
-    
-    header .cuenta-carrito {
-        margin-top: 10px;
-        justify-content: center;
-        width: 100%;
-    }
-    
-    nav ul {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-    }
-    
-    nav .img-nav {
-        height: 100px;
-        width: 100px;
-    }
-    
-    main .productos-destacados {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
-    
-    footer .contenido-info {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    
-    footer .contenido-infodiv {
-        align-items: center;
-        text-align: center;
-    }
-
-    .carousel{
-        height: 500px;
-    }
-}
-
-@media (max-width: 700px) {
-    .carousel{
-        height: 400px;
-    }
-}
-
-@media (max-width: 576px) {
-
-    .control-button {
-        width: 14px;
-        height: 14px;
-        margin-bottom: 5px;
-
-    }
-    
-    header .cuenta-carrito{
-        font-size: 14px;
-    }
-
-    header .caja-busqueda{
-        font-size: 14px;
-    }
-
-    .contenedor-migas {
-        padding: 8px 10px;
-    }
-    
-    .nav-migas {
-        font-size: 13px;
-    }
-
-    nav ul {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    nav .img-nav {
-        height: 120px;
-        width: 120px;
-        object-fit: contain;
-    }
-    
-    main .titulos {
-        font-size: 20px;
-    }
-    
-    main .productos-destacados {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-        gap: 10px;
-    }
-    
-    main .producto-descripcion {
-        font-size: 14px;
-    }
-    
-    main .precio {
-        font-size: 14px;
-    }
-    
-    footer .img-footer {
-        height: 100px;
-        width: 100px;
-    }
-    
-    footer .enlaces-pie {
-        flex-direction: column;
-    }
-    
-    footer .enlaces-pie a {
-        margin: 5px 0;
-    }
-    .carousel{
-        height: auto;
-    }
-
-    main .contenido-nosotros {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 400px) {
-    header .logo-supermercado img {
-        height: 40px;
-    }
-    
-    header .caja-busqueda {
-        font-size: 14px;
-    }
-    
-    header .boton-busqueda {
-        font-size: 12px;
-    }
-    
-    nav .img-nav {
-        height: 50px;
-        width: 50px;
-    }
-    
-    nav ul li a {
-        font-size: 14px;
-    }
-    
-    main .productos-destacados {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .contenedor-migas {
-        padding: 6px 8px;
-    }
-    
-    .nav-migas {
-        font-size: 12px;
-    }
+.carousel:hover .indicator.active .progress-bar {
+    animation-play-state: paused;
 }
 
 .formulario-reclamacion {
@@ -753,7 +549,7 @@ footer .textRedes {
 
 .input-group input:focus,
 .input-group textarea:focus {
-    border-color: #ffab00; /* Resalta los bordes cuando está enfocado */
+    border-color: #ffab00;
     background-color: #fff;
     outline: none;
     box-shadow: 0 0 5px rgba(13, 71, 161, 0.2);
@@ -801,9 +597,6 @@ footer .textRedes {
     transform: translateY(-3px);
 }
 
-
-
-/* Menu Hamburguesa*/
 .hamburger-menu {
     display: none;
     position: fixed;
@@ -838,12 +631,408 @@ footer .textRedes {
     display: none;
 }
 
-/* Estilos actualizados para la navegación */
-.navegador {
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100px) scale(0.5);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.whatsapp-float.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.whatsapp-float a {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+    min-width: 60px;
+    justify-content: center;
+}
+
+.whatsapp-float a:hover,
+.whatsapp-float.hover a {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+    background: linear-gradient(135deg, #128c7e, #25d366);
+}
+
+.whatsapp-float .whatsapp-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+}
+
+.whatsapp-float .whatsapp-text {
+    margin-left: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
     transition: all 0.3s ease;
 }
 
+.whatsapp-float:hover .whatsapp-text,
+.whatsapp-float.hover .whatsapp-text {
+    opacity: 1;
+    width: auto;
+    margin-left: 10px;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 1001;
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 50px;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px var(--shadow);
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 25px var(--shadow);
+}
+
+.theme-toggle svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle .sun-icon {
+    display: none;
+}
+
+.theme-toggle .moon-icon {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+    display: none;
+}
+
+footer {
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .img-footer {
+    height: auto;
+    width: 200px;
+}
+
+footer .enlaces-pie a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+footer .enlaces-pie a:hover {
+    text-decoration: underline;
+}
+
+footer .enlaces-pie {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+footer .info {
+    padding: 0 20px;
+    margin-bottom: 150px;
+    margin-top: 50px;
+    
+}
+
+footer .contenido-pie {
+    background-color: var(--color-header);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    
+}
+
+footer .contenido-info {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer .contenido-infodiv {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-primary);
+    text-align: left;
+    font-size: 14px;
+}
+
+footer .textRedes {
+    text-decoration: none;
+    color: var(--text-primary);
+    display: block;
+    margin-top: 10px;
+}
+
+@media (max-width: 1200px) {
+    main .contenido-main {
+        padding: 0 20px;
+    }
+    
+    footer .contenido-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .carousel {
+        height: auto;
+    }
+}
+
+@media (max-width: 1024px) {
+    .carousel-item.big-image {
+        display: none;
+    }
+
+    .carousel-item.small-image {
+        display: block;
+    }
+    
+    .carousel-item img {
+        height: auto; 
+    }
+    
+    .carousel {
+        height: 650px;
+    }
+}
+
+@media (max-width: 992px) {
+    nav ul {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    main .productos-destacados {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+    
+    .carousel-item img {
+        height: auto; 
+    }
+    
+    .carousel {
+        height: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contenedor-migas {
+        padding: 10px 15px;
+    }
+    
+    .nav-migas {
+        font-size: 14px;
+    }
+    
+    header {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    header .busqueda {
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    header .cuenta-carrito {
+        margin-top: 10px;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    nav ul {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+    
+    nav .img-nav {
+        height: 100px;
+        width: 100px;
+    }
+    
+    main .productos-destacados {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    footer .contenido-info {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    footer .contenido-infodiv {
+        align-items: center;
+        text-align: center;
+    }
+
+    .carousel {
+        height: 500px;
+    }
+    
+    .whatsapp-float {
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .whatsapp-float a {
+        padding: 12px 15px;
+        min-width: 50px;
+    }
+    
+    .whatsapp-float .whatsapp-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .whatsapp-float .whatsapp-text {
+        font-size: 12px;
+    }
+    
+    .theme-toggle {
+        top: auto;
+        bottom: 100px;
+        right: 15px;
+        transform: none;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle:hover {
+        transform: scale(1.1);
+    }
+    
+    .theme-toggle svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 700px) {
+    .carousel {
+        height: 400px;
+    }
+}
+
 @media (max-width: 576px) {
+    .control-button {
+        width: 14px;
+        height: 14px;
+        margin-bottom: 5px;
+    }
+    
+    header .cuenta-carrito {
+        font-size: 14px;
+    }
+
+    header .caja-busqueda {
+        font-size: 14px;
+    }
+
+    .contenedor-migas {
+        padding: 8px 10px;
+    }
+    
+    .nav-migas {
+        font-size: 13px;
+    }
+
+    nav ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    nav .img-nav {
+        height: 120px;
+        width: 120px;
+        object-fit: contain;
+    }
+    
+    main .titulos {
+        font-size: 20px;
+    }
+    
+    main .productos-destacados {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 10px;
+    }
+    
+    main .producto-descripcion {
+        font-size: 14px;
+    }
+    
+    main .precio {
+        font-size: 14px;
+    }
+    
+    footer .img-footer {
+        height: 100px;
+        width: 100px;
+    }
+    
+    footer .enlaces-pie {
+        flex-direction: column;
+    }
+    
+    footer .enlaces-pie a {
+        margin: 5px 0;
+    }
+    
+    .carousel {
+        height: auto;
+    }
+
+    main .contenido-nosotros {
+        grid-template-columns: 1fr;
+    }
+    
     .hamburger-menu {
         display: block;
     }
@@ -910,4 +1099,104 @@ footer .textRedes {
     .menu-checkbox:checked ~ .overlay {
         display: block;
     }
+}
+
+@media (max-width: 400px) {
+    header .logo-supermercado img {
+        height: 40px;
+    }
+    
+    header .caja-busqueda {
+        font-size: 14px;
+    }
+    
+    header .boton-busqueda {
+        font-size: 12px;
+    }
+    
+    nav .img-nav {
+        height: 50px;
+        width: 50px;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+    }
+    
+    main .productos-destacados {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .contenedor-migas {
+        padding: 6px 8px;
+    }
+    
+    .nav-migas {
+        font-size: 12px;
+    }
+}
+
+/* Indicador de conexión a internet */
+.connection-status {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1002;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-100px) scale(0.8);
+}
+
+.connection-status.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.connection-status.online {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+}
+
+.connection-status.offline {
+    background: linear-gradient(135deg, #f44336, #e53935);
+    color: white;
+}
+
+.connection-status .status-icon {
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* Estilos para modo offline */
+.offline-mode .button-add:disabled {
+    background-color: #cccccc !important;
+    color: #666666 !important;
+}
+
+.offline-mode .boton-busqueda:disabled {
+    background-color: #cccccc !important;
+    color: #666666 !important;
+    cursor: not-allowed !important;
+}
+
+.offline-mode .caja-busqueda:disabled {
+    background-color: #f5f5f5 !important;
+    color: #666666 !important;
+    cursor: not-allowed !important;
+}
+
+.connection-status.offline {
+    background: linear-gradient(135deg, #f44336, #e53935);
+    color: white;
+    border: 2px solid #d32f2f;
 }

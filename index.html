@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supermercado</title>
+    <title>Supermercado Mejorado</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
+    <!-- Header fijo con glassmorphism -->
+    <header class="header-fixed">
         <div class="logo-supermercado">
             <a href="index.html">
                 <img src="./imagenes/logo.png" alt="Logo del supermercado">
             </a>
         </div>
         <div class="busqueda">
-            <input type="text1" placeholder="  Buscar productos..." class="caja-busqueda">
+            <input type="text" placeholder="  Buscar productos..." class="caja-busqueda">
             <button class="boton-busqueda">Buscar</button>
         </div>
         <div class="cuenta-carrito">
@@ -23,59 +24,41 @@
         </div>
     </header>
 
-    <!-- Menú hamburguesa para pantallas pequeñas -->
-    <input type="checkbox" id="menu-toggle" class="menu-checkbox">
-    <label for="menu-toggle" class="hamburger-menu">
-        <div class="hamburger-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </label>
-    
-    <!-- Overlay para cerrar el menú al hacer clic fuera -->
-    <div class="overlay"></div>
-
-    <!-- Guia para usar el carrusel inspirado en codigo hecho por Albert Escamilla-->
-    <!-- Carrusel de imágenes -->
-    <section class="carousel">
+    <section class="carousel" id="carousel">
         <div class="carousel-container">
-            <!-- Controles de radio para la navegación -->
-            <input type="radio" name="carousel" id="slide1" checked>
-            <input type="radio" name="carousel" id="slide2">
-            <input type="radio" name="carousel" id="slide3">
-            
-            <!-- Imágenes del carrusel -->
-            <div class="carousel-images">
-                <a class="carousel-item big-image" href="Comidas.html">
-                    <img src="./imagenes/bienvenido.png" alt="Imagen 1">
+            <div class="carousel-images" id="carouselImages">
+                <a class="carousel-item" href="Comidas.html">
+                    <img src="./imagenes/bienvenido.png" alt="Imagen 1" class="big-image">
+                    <img src="./imagenes/bienvenido-small.png" alt="Imagen 1 pequeña" class="small-image">
                 </a>
-                <a class="carousel-item small-image" href="Comidas.html">
-                    <img src="./imagenes/bienvenido-small.png" alt="Imagen 1 pequeña">
+                <a class="carousel-item" href="Cervezas.html">
+                    <img src="./imagenes/banner1.png" alt="Imagen 2" class="big-image">
+                    <img src="./imagenes/banner1-small.png" alt="Imagen 2 pequeña" class="small-image">
                 </a>
-                <a class="carousel-item big-image" href="Cervezas.html">
-                    <img src="./imagenes/banner1.png" alt="Imagen 2">
-                </a>
-                <a class="carousel-item small-image" href="Cervezas.html">
-                    <img src="./imagenes/banner1-small.png" alt="Imagen 2 pequeña">
-                </a>
-                <a class="carousel-item big-image" href="Bebidas.html">
-                    <img src="./imagenes/banner2.png" alt="Imagen 3">
-                </a>
-                <a class="carousel-item small-image" href="Bebidas.html">
-                    <img src="./imagenes/banner2-small.png" alt="Imagen 3 pequeña">
+                <a class="carousel-item" href="Bebidas.html">
+                    <img src="./imagenes/banner2.png" alt="Imagen 3" class="big-image">
+                    <img src="./imagenes/banner2-small.png" alt="Imagen 3 pequeña" class="small-image">
                 </a>
             </div>
     
-            <!-- Controles para navegar entre las imágenes -->
-            <div class="carousel-controls">
-                <label for="slide1" class="control-button"></label>
-                <label for="slide2" class="control-button"></label>
-                <label for="slide3" class="control-button"></label>
+            <button class="carousel-nav prev" id="prevBtn">‹</button>
+            <button class="carousel-nav next" id="nextBtn">›</button>
+    
+            <div class="carousel-indicators" id="carouselIndicators">
+                <div class="indicator active" data-slide="0">
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="indicator" data-slide="1">
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="indicator" data-slide="2">
+                    <div class="progress-bar"></div>
+                </div>
             </div>
         </div>
     </section>
-    <div class="navegador">
+
+    <div class="navegador" id="navegador">
         <nav>
             <ul>
                 <div class="nav-div">
@@ -86,49 +69,48 @@
                 </div>
                 <div class="nav-div">
                     <a href="Cervezas.html">
-                        <img src="./imagenes/Navegador/Cervezas.jpg" alt="Imagen de Cervezas" class="img-nav">
+                        <img src="./imagenes/Navegador/Cervezas.png" alt="Imagen de Cervezas" class="img-nav">
                     </a>
                     <li><a href="Cervezas.html">Cervezas</a></li>
                 </div>
                 <div class="nav-div">
                     <a href="Licores.html">
-                        <img src="./imagenes/Navegador/Licores.jpg" alt="Imagen de Licores" class="img-nav">
+                        <img src="./imagenes/Navegador/Licores.png" alt="Imagen de Licores" class="img-nav">
                     </a>
                     <li><a href="Licores.html">Licores</a></li> 
                 </div>
                 <div class="nav-div">
                     <a href="Comidas.html">
-                        <img src="./imagenes/Navegador/Comidas.jpg" alt="Imagen de una hamburguesa" class="img-nav">
+                        <img src="./imagenes/Navegador/Comidas.png" alt="Imagen de una hamburguesa" class="img-nav">
                     </a>
                     <li><a href="Comidas.html">Comidas</a></li>
                 </div>
                 <div class="nav-div">
                     <a href="Bebidas.html">
-                        <img src="./imagenes/Navegador/Bebidas.jpg" alt="Imagen de Gaseosas" class="img-nav">
+                        <img src="./imagenes/Navegador/Bebidas.png" alt="Imagen de Gaseosas" class="img-nav">
                     </a>
                     <li><a href="Bebidas.html">Bebidas</a></li>
                 </div>
                 <div class="nav-div">
                     <a href="Antojos.html">
-                        <img src="./imagenes/Navegador/Antojos.jpg" alt="Imagen de Chocolates" class="img-nav">
+                        <img src="./imagenes/Navegador/Antojos.png" alt="Imagen de Chocolates" class="img-nav">
                     </a>
                     <li><a href="Antojos.html">Antojos</a></li>   
                 </div>
                 <div class="nav-div">
                     <a href="Helados.html">
-                        <img src="./imagenes/Navegador/Helados.jpg" alt="Imagen de un bote de helado" class="img-nav">
+                        <img src="./imagenes/Navegador/Helados.png" alt="Imagen de un bote de helado" class="img-nav">
                     </a>
                     <li><a href="Helados.html">Helados</a></li>
                 </div>
                 <div class="nav-div">
                     <a href="Despensa.html">
-                        <img src="./imagenes/Navegador/Despensa.jpg" alt="Imagen de Aceites" class="img-nav">
+                        <img src="./imagenes/Navegador/Despensa.png" alt="Imagen de Aceites" class="img-nav">
                     </a>
                     <li><a href="Despensa.html">Despensa</a></li>
                 </div>
             </ul>
         </nav>
-
     </div>
 
     <main>
@@ -139,7 +121,7 @@
             <p class="titulos">Cervezas</p>
             <section class="productos-destacados">
                     <div class="producto">
-                        <img src="./imagenes/Productos/Cervezas1.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Cervezas1.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Cerveza Tres Cruces Lager Six Pack Lata 355ml</p>
 
@@ -150,7 +132,7 @@
                     </div>
                     
                     <div class="producto">
-                        <img src="./imagenes/Productos/Cervezas2.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Cervezas2.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Cerveza De Malta Y Maiz Dragenburg Sixpack 310 Ml</p>
 
@@ -161,7 +143,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Cervezas3.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Cervezas3.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Cerveza Coronita Six Pack Botella 210 ml</p>
 
@@ -172,7 +154,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Cervezas4.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Cervezas4.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Cerveza Heineken Fourpack Lata 473 ml</p>
 
@@ -182,7 +164,7 @@
                         </div>
                     </div>
                     <div class="producto">
-                        <img src="./imagenes/Productos/Cervezas5.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Cervezas5.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Cerveza Tres Cruces Light Six Pack Lata X 310 Ml</p>
 
@@ -193,7 +175,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Cervezas6.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Cervezas6.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Cerveza Pilsen Callao Six Pack Lata 355 ml</p>
 
@@ -216,7 +198,7 @@
             <p class="titulos">Licores</p>
             <section class="productos-destacados">
                     <div class="producto">
-                        <img src="./imagenes/Productos/Licores1.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Licores1.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack 2 Cartavio Añejo Black 1L</p>
 
@@ -227,7 +209,7 @@
                     </div>
                     
                     <div class="producto">
-                        <img src="./imagenes/Productos/Licores2.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Licores2.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack 2 Ron Black Barrel 1L</p>
 
@@ -238,7 +220,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Licores3.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Licores3.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack 2 Ron Cartavio Añejo Black 750ml</p>
 
@@ -249,7 +231,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Licores4.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Licores4.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack 2 Vodka Russkaya Apple 750ml</p>
 
@@ -259,7 +241,7 @@
                         </div>
                     </div>
                     <div class="producto">
-                        <img src="./imagenes/Productos/Licores5.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Licores5.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Ron Cartavio Black 1 L</p>
 
@@ -270,7 +252,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Licores6.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Licores6.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Ron Cartavio Black 750 ml</p>
 
@@ -293,7 +275,7 @@
             <p class="titulos">Comidas</p>
             <section class="productos-destacados">
                     <div class="producto">
-                        <img src="./imagenes/Productos/Comidas1.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Comidas1.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Hamburguesa Prime de Cerdo Miel de Maple 1 und</p>
 
@@ -304,7 +286,7 @@
                     </div>
                     
                     <div class="producto">
-                        <img src="./imagenes/Productos/Comidas2.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Comidas2.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (3 Empanada De Carne + 3 Empanada De Pollo + 1 Coca Cola x 1 Lt)</p>
 
@@ -315,7 +297,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Comidas3.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Comidas3.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Sandwich Prime Pulled Pork</p>
 
@@ -326,7 +308,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Comidas4.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Comidas4.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Hamburguesa Prime de Res Tocino Queso 1 und</p>
 
@@ -336,7 +318,7 @@
                         </div>
                     </div>
                     <div class="producto">
-                        <img src="./imagenes/Productos/Comidas5.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Comidas5.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (5 Empanada De Carne + 5 Empanada De Pollo + 1 Coca Cola x 1 Lt)</p>
 
@@ -347,7 +329,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Comidas6.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Comidas6.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (10 Empanada De Carne)</p>
 
@@ -370,7 +352,7 @@
             <p class="titulos">Bebidas</p>
             <section class="productos-destacados">
                     <div class="producto">
-                        <img src="./imagenes/Productos/Bebidas1.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Bebidas1.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (1 Rehidratante Life SOS Recovery Sabor Tropical + 1 Rehidratante Life SOS Relax Sabor Mix de Frutas) Lata 355ml</p>
 
@@ -381,7 +363,7 @@
                     </div>
                     
                     <div class="producto">
-                        <img src="./imagenes/Productos/Bebidas2.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Bebidas2.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (2 Coca Cola x 1 Lt)</p>
 
@@ -392,7 +374,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Bebidas3.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Bebidas3.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (3 Schweppes Ginger Ale x 1.5 Lt)</p>
 
@@ -403,7 +385,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Bebidas4.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Bebidas4.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (4 Coca Cola x 1 Lt)</p>
 
@@ -413,7 +395,7 @@
                         </div>
                     </div>
                     <div class="producto">
-                        <img src="./imagenes/Productos/Bebidas5.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Bebidas5.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (4 Inca Kola x 1 Lt)</p>
 
@@ -424,7 +406,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Bebidas6.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Bebidas6.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (2 Energizante Red Bull Sugar Free x 250 Ml)</p>
 
@@ -447,7 +429,7 @@
             <p class="titulos">Antojos</p>
             <section class="productos-destacados">
                     <div class="producto">
-                        <img src="./imagenes/Productos/Antojos1.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Antojos1.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (2 Inka Chips Jalapeño x 135 Gr)</p>
 
@@ -458,7 +440,7 @@
                     </div>
                     
                     <div class="producto">
-                        <img src="./imagenes/Productos/Antojos2.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Antojos2.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (2 Inka Chips Queso Y Cebolla x 135 Gr)
                         </p>
@@ -470,7 +452,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Antojos3.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Antojos3.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack 1 (Keke Pinguino Marinela Cookies Cream 80gr + Keke Pinguino Marinela Triple Chocolate 80gr)</p>
 
@@ -481,7 +463,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Antojos4.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Antojos4.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack 2 (Papas Kona Select Original 100 Gr)</p>
 
@@ -491,7 +473,7 @@
                         </div>
                     </div>
                     <div class="producto">
-                        <img src="./imagenes/Productos/Antojos5.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Antojos5.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (2 Papas Jappy Snacks BBQ 200 gr)</p>
 
@@ -502,7 +484,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Antojos6.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Antojos6.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (2 Papas Jappy Snacks Jalapeño 200 gr)</p>
 
@@ -525,7 +507,7 @@
             <p class="titulos">Helados</p>
             <section class="productos-destacados">
                     <div class="producto">
-                        <img src="./imagenes/Productos/Helados1.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Helados1.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Helado grand Prix Bombones 216 ml</p>
 
@@ -536,7 +518,7 @@
                     </div>
                     
                     <div class="producto">
-                        <img src="./imagenes/Productos/Helados2.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Helados2.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Helado Donofrio Peziduri Tricolor Cremoso 900 ml</p>
 
@@ -547,7 +529,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Helados3.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Helados3.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Helado Donofrio Peziduri Chocochips Cremoso 900 ml</p>
 
@@ -558,7 +540,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Helados4.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Helados4.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Helado Donofrio Peziduri Vainilla Cremoso 900 ml</p>
 
@@ -568,7 +550,7 @@
                         </div>
                     </div>
                     <div class="producto">
-                        <img src="./imagenes/Productos/Helados5.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Helados5.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Helado Gelático Chocobrownie 450ml</p>
 
@@ -579,7 +561,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Helados6.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Helados6.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Helado Gelatico Chocochips 930 ml</p>
 
@@ -602,7 +584,7 @@
             <p class="titulos">Despensa</p>
             <section class="productos-destacados">
                     <div class="producto">
-                        <img src="./imagenes/Productos/Despensa1.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Despensa1.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (2 Huevo Pardo La Calera x 15 Und)</p>
 
@@ -613,7 +595,7 @@
                     </div>
                     
                     <div class="producto">
-                        <img src="./imagenes/Productos/Despensa2.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Despensa2.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Pack (3 Bebida Láctea Uht Gloria Pro Triple Zero Chocolate 320 Ml)</p>
 
@@ -624,7 +606,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Despensa3.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Despensa3.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Keke Bimbo Marmoleado Familiar 380 gr</p>
 
@@ -635,7 +617,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Despensa4.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Despensa4.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Keke Bimbo Naranja Familiar 380 gr</p>
 
@@ -645,7 +627,7 @@
                         </div>
                     </div>
                     <div class="producto">
-                        <img src="./imagenes/Productos/Despensa5.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Despensa5.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Leche UHT Gloria Entera 1 L</p>
 
@@ -656,7 +638,7 @@
                     </div>
 
                     <div class="producto">
-                        <img src="./imagenes/Productos/Despensa6.webp" alt="Producto 1" />
+                        <img src="./imagenes/Productos/Despensa6.png" alt="Producto 1" />
 
                         <p class="producto-descripcion">Bebida Láctea Pro UHT Chocolate 320 ml</p>
 
@@ -682,7 +664,7 @@
         <div class="info">
             <div class="contenido-info">
                 <div class="contenido-infodiv">
-                    <img src="./imagenes/Navegador/Inicio.png" alt="Logo del supermercado" class="img-footer">
+                    <img src="./imagenes/logo.png" alt="Logo del supermercado" class="img-footer">
                 </div>
                 <div class="contenido-infodiv">
                     <h3>Conócenos</h3>
@@ -713,6 +695,6 @@
             </div>
         </div>
     </footer>
-
+    <script src="script.js"></script>
 </body>
 </html>
