@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header-fixed">
+        <div class="logo">
+            <h1>Tu Tienda</h1>
+            <span id="usuario-info"></span>
+        </div>
+        <div class="nav-header">
+            <div class="nav-links">
+                <a href="index.html" class="carrito">Inicio</a> 
+            </div>
+            <div class="nav-links">
+                <a href="cuenta.html" class="carrito">Mi cuenta</a>
+            </div>
+            <div class="nav-links">
+                <a href="carrito.html" class="carrito"><span>Carrito (S/ 0.00)</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="cuenta-contenedor">
+        <div class="cuenta-header">
+            <div class="avatar-usuario">
+                <span id="inicial-usuario">U</span>
+            </div>
+            <h2 id="nombre-usuario">Usuario</h2>
+            <p class="fecha-registro">Miembro desde hoy</p>
+        </div>
+
+        <div class="cuenta-secciones">
+            <div class="seccion-info">
+                <h3>📋 Información de la Cuenta</h3>
+                <div class="info-item">
+                    <span class="info-label">Usuario:</span>
+                    <span id="usuario-nombre" class="info-value">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Estado:</span>
+                    <span class="info-value estado-activo">Activo</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Último acceso:</span>
+                    <span id="ultimo-acceso" class="info-value">-</span>
+                </div>
+            </div>
+
+            <div class="seccion-estadisticas">
+                <h3>📊 Estadísticas</h3>
+                <div class="estadistica">
+                    <div class="stat-numero" id="productos-carrito">0</div>
+                    <div class="stat-label">Productos en carrito</div>
+                </div>
+                <div class="estadistica">
+                    <div class="stat-numero" id="total-carrito">S/ 0.00</div>
+                    <div class="stat-label">Total en carrito</div>
+                </div>
+                <div class="estadistica">
+                    <div class="stat-numero" id="sesiones-activas">1</div>
+                    <div class="stat-label">Sesiones activas</div>
+                </div>
+            </div>
+
+            <div class="seccion-acciones">
+                <h3>⚙️ Acciones de Cuenta</h3>
+                <div class="acciones-grid">
+                    <button onclick="verCarrito()" class="btn-accion">
+                        <span class="icono">🛒</span>
+                        <span>Ver Carrito</span>
+                    </button>
+                    <button onclick="limpiarDatos()" class="btn-accion">
+                        <span class="icono">🧹</span>
+                        <span>Limpiar Datos</span>
+                    </button>
+                    <button onclick="exportarDatos()" class="btn-accion">
+                        <span class="icono">📄</span>
+                        <span>Exportar Datos</span>
+                    </button>
+                    <button onclick="cambiarTema()" class="btn-accion">
+                        <span class="icono">🌙</span>
+                        <span id="tema-texto">Modo Oscuro</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="seccion-configuracion">
+                <h3>🔧 Configuración</h3>
+                <div class="config-item">
+                    <label for="recordar-carrito">
+                        <input type="checkbox" id="recordar-carrito" checked>
+                        Recordar productos en carrito
+                    </label>
+                </div>
+                <div class="config-item">
+                    <label for="tema-automatico">
+                        <input type="checkbox" id="tema-automatico">
+                        Tema automático según hora del día
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="cuenta-footer">
+            <button onclick="cerrarSesion()" class="btn-cerrar-sesion">
+                <span class="icono">🚪</span>
+                Cerrar Sesión
+            </button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

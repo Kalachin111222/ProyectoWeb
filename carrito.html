@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-case=1.0">
+    <title>Mi Carrito</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header-fixed">
+        <div class="logo">
+            <h1>Tu Tienda</h1>
+            <span id="usuario-info"></span>
+        </div>
+        <div class="nav-header">
+            <div class="nav-links">
+                <a href="index.html" class="carrito">Inicio</a>  
+            </div>
+            <div class="nav-links">
+                <a href="cuenta.html" class="carrito">Mi cuenta</a>
+            </div>
+            <div class="nav-links">
+                <a href="carrito.html" class="carrito"><span>Carrito (S/ 0.00)</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="carrito-contenedor">
+        <h2>Mi Carrito de Compras</h2>
+        <div id="carrito-items">
+        </div>
+        <div class="carrito-total">
+            <h3 id="total-final">Total: S/ 0.00</h3>
+        </div>
+        <div class="carrito-acciones">
+            <button onclick="vaciarCarrito()" class="btn-vaciar">Vaciar Carrito</button>
+            <button onclick="window.location.href='index.html'" class="btn-continuar">Continuar Comprando</button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
