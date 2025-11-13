@@ -3,694 +3,965 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supermercado Mejorado</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Supermercado</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #e8e8e8;
+            --bg-card: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --border-color: #eeeeee;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --text-producto: #0d47a1;
+            --color-header: #0d47a1;
+            --item-migas-activo: black;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-card: #61616169;
+            --text-primary: #E0E0E0;
+            --text-secondary: #cccccc;
+            --border-color: #444444;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --text-producto: #E0E0E0;
+            --color-header: #0d48a169;
+            --item-migas-activo: white;
+        }
+
+        body {
+            font-family: Poppins, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .header-fixed {
+            background: var(--color-header); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.8);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .whatsapp-float.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .whatsapp-float a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            border-radius: 50%;
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .whatsapp-float a:hover,
+        .whatsapp-float.hover a {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+            background: linear-gradient(135deg, #128c7e, #25d366);
+            width: auto;
+            border-radius: 30px;
+            padding: 0 20px;
+        }
+
+        .whatsapp-float .whatsapp-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        .whatsapp-float .whatsapp-text {
+            margin-left: 10px;
+            font-weight: 500;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            width: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover .whatsapp-text,
+        .whatsapp-float.hover .whatsapp-text {
+            opacity: 1;
+            width: auto;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle .sun-icon {
+            display: none;
+        }
+
+        .theme-toggle .moon-icon {
+            display: block;
+        }
+
+        [data-theme="dark"] .theme-toggle .sun-icon {
+            display: block;
+        }
+
+        [data-theme="dark"] .theme-toggle .moon-icon {
+            display: none;
+        }
+
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px) scale(0.8);
+            z-index: 1001;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px var(--shadow);
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .connection-status.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0) scale(1);
+        }
+
+        .connection-status.online {
+            background: #dcfce7;
+            color: #166534;
+            border-color: #bbf7d0;
+        }
+
+        .connection-status.offline {
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #fecaca;
+        }
+
+        .status-icon {
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                bottom: 80px;
+                right: 15px;
+            }
+            
+            .theme-toggle {
+                right: 15px;
+            }
+            
+            .whatsapp-float a {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .theme-toggle {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        .offline-mode .button-add:disabled {
+            background-color: #cccccc !important;
+            color: #666666 !important;
+        }
+
+        .offline-mode .boton-busqueda:disabled {
+            background-color: #cccccc !important;
+            color: #666666 !important;
+            cursor: not-allowed !important;
+        }
+
+        .offline-mode .caja-busqueda:disabled {
+            background-color: #f5f5f5 !important;
+            color: #666666 !important;
+            cursor: not-allowed !important;
+        }
+        @keyframes pulseOpacity {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .pulse-animation {
+            animation: pulseOpacity 2s ease-in-out infinite;
+        }
+        
+        .pulse-animation:hover {
+            animation-play-state: paused;
+        }
+        
+        @keyframes progressFill {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+        
+        .progress-fill {
+            animation: progressFill 0.002s linear infinite;
+        }
+        
+        .carousel-pause:hover .progress-fill {
+            animation-play-state: paused;
+        }
+        
+        .indicator.active {
+            width: 2rem;
+        }
+        
+        .indicator {
+            border: 2px solid #d1d5db;
+        }
+        
+        .dark .indicator {
+            border: 2px solid #6b7280;
+        }
+        #hamburgerMenu {
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        #menuOverlay {
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+
+        #hamburgerBtn {
+            transition: transform 0.2s ease;
+        }
+
+        #hamburgerBtn:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 768px) {
+            #hamburgerMenu {
+                width: 85vw;
+                max-width: 320px;
+            }
+        }
+
+        .caja-busqueda:focus {
+            outline: none;
+            border-color: #fbbf24;
+        }
+        
+        .boton-busqueda:hover {
+            background-color: #f59e0b;
+        }
+        
+        .icon-button {
+            transition: transform 0.2s ease;
+        }
+        
+        .icon-button:hover {
+            transform: scale(1.1);
+        }
+        
+    </style>
+
 </head>
-<body>
-    <header class="header-fixed">
-        <div class="logo-supermercado">
-            <a href="index.html">
-                <img src="./imagenes/logo.png" alt="Logo del supermercado">
+
+<body class="font-sans antialiased min-h-screen flex flex-col pt-16" style="background-color: var(--bg-primary); color: var(--text-primary);">
+    <header class="header-fixed fixed top-0 left-0 right-0 z-50 w-full p-2 flex justify-between items-center shadow-lg">
+        <button id="hamburgerBtn" class="md:hidden text-white text-2xl z-60 icon-button p-2">
+            <svg id="hamburgerIcon" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+       
+        <div class="flex-shrink-0">
+            <a href="index.html" class="icon-button inline-block">
+                <img src="./imagenes/logo.png" alt="Logo del supermercado" class="h-12 w-auto">
             </a>
         </div>
-        <div class="busqueda">
-            <input type="text" placeholder="  Buscar productos..." class="caja-busqueda">
-            <button class="boton-busqueda">Buscar</button>
+       
+        <div class="hidden md:flex flex-1 justify-center items-center mx-8">
+            <div class="relative w-full max-w-3xl">
+                <input type="text" placeholder="Buscar productos..." class="caja-busqueda p-3 pl-12 pr-4 text-base w-full rounded-lg border border-gray-300 h-11" style="background-color: var(--bg-primary); color: var(--text-primary);">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
         </div>
-        <div class="cuenta-carrito">
-            <a href="cuenta.html" class="carrito">Mi cuenta</a>
-            <a href="carrito.html" class="carrito"><span>Carrito (S/ 0.00)</span></a>
+       
+        <div class="hidden md:flex flex-nowrap items-center text-white gap-4">
+            <a href="cuenta.html" class="no-underline text-white flex items-center gap-2 icon-button hover:text-yellow-300 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span>Mi cuenta</span>
+            </a>
+            
+            <a href="carrito.html" class="no-underline text-white flex items-center gap-2 icon-button hover:text-yellow-300 transition-colors">
+                <div class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span id="carrito-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span>
+                </div>
+                <span id="carrito-total">Carrito (S/ 0.00)</span>
+            </a>
         </div>
-    </header>
+    </header>   
 
-    <section class="carousel" id="carousel">
-        <div class="carousel-container">
-            <div class="carousel-images" id="carouselImages">
-                <a class="carousel-item" href="Comidas.html">
-                    <img src="./imagenes/bienvenido.png" alt="Imagen 1" class="big-image">
-                    <img src="./imagenes/bienvenido-small.png" alt="Imagen 1 pequeña" class="small-image">
+    <div id="hamburgerMenu" class="fixed top-0 left-0 h-full w-80 bg-white dark:bg-gray-800 shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto" style="background-color: var(--bg-card);">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8 border-b pb-4" style="border-color: var(--border-color);">
+                <h2 class="text-xl font-bold" style="color: var(--text-primary);">Menú</h2>
+                <button id="closeMenuBtn" class="text-2xl" style="color: var(--text-primary);">×</button>
+            </div>
+            
+            <div class="mb-6 md:hidden">
+                <div class="relative">
+                    <input type="text" placeholder="Buscar productos..." class="w-full p-3 pl-12 rounded-lg border" style="background-color: var(--bg-primary); color: var(--text-primary); border-color: var(--border-color);">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="space-y-4 mb-8">
+                <div id="usuario-info-mobile">
+                    <a href="cuenta.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
+                        <span class="font-semibold">Mi Cuenta</span>
+                    </a>
+                </div>
+                <div class="cuenta-carrito">
+                    <a href="carrito.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
+                        <span id="carrito-total-mobile">Carrito (S/ 0.00)</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t pt-6" style="border-color: var(--border-color);">
+                <h3 class="text-lg font-bold mb-4" style="color: var(--text-primary);">Categorías</h3>
+                <div class="space-y-3">
+                    <a href="index.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
+                        <span>Inicio</span>
+                    </a>
+                    <a href="Cervezas.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
+                        <span>Cervezas</span>
+                    </a>
+                    <a href="Licores.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
+                        <span>Licores</span>
+                    </a>
+                    <a href="Comidas.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
+                        <span>Comidas</span>
+                    </a>
+                    <a href="Bebidas.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
+                        <span>Bebidas</span>
+                    </a>
+                    <a href="Antojos.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
+                        <span>Antojos</span>
+                    </a>
+                    <a href="Helados.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
+                        <span>Helados</span>
+                    </a>
+                    <a href="Despensa.html" class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
+                        <span>Despensa</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="menuOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 opacity-0 invisible transition-all duration-300"></div>
+    <section class="w-full overflow-hidden relative carousel-pause z-10 !h-64 md:!h-96 lg:!h-[600px]" id="carousel">
+        <div class= "relative w-full h-full bg-gray-200 dark:bg-gray-800 transition-colors duration-300 z-10 ">
+            <div class="flex h-full transition-transform duration-500 ease-out z-10" style="width: 300%;" id="carouselImages">
+                <a class="w-1/3 h-full relative overflow-hidden group" href="#">
+                    <img src="./imagenes/bienvenido.png" alt="Imagen 1" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 hidden md:block">
+                    <img src="./imagenes/bienvenido-small.png" alt="Imagen 1" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 block md:hidden">
+
                 </a>
-                <a class="carousel-item" href="Cervezas.html">
-                    <img src="./imagenes/banner1.png" alt="Imagen 2" class="big-image">
-                    <img src="./imagenes/banner1-small.png" alt="Imagen 2 pequeña" class="small-image">
+                <a class="w-1/3 h-full relative overflow-hidden group" href="#">
+                    <img src="./imagenes/banner1.png" alt="Imagen 2" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 hidden md:block">
+                    <img src="./imagenes/banner1-small.png" alt="Imagen 2" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 block md:hidden">
                 </a>
-                <a class="carousel-item" href="Bebidas.html">
-                    <img src="./imagenes/banner2.png" alt="Imagen 3" class="big-image">
-                    <img src="./imagenes/banner2-small.png" alt="Imagen 3 pequeña" class="small-image">
+                <a class="w-1/3 h-full relative overflow-hidden group" href="#">
+                    <img src="./imagenes/banner2.png" alt="Imagen 3" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 hidden md:block">
+                    <img src="./imagenes/banner2-small.png" alt="Imagen 3" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 block md:hidden">
                 </a>
             </div>
-    
-            <button class="carousel-nav prev" id="prevBtn">‹</button>
-            <button class="carousel-nav next" id="nextBtn">›</button>
-    
-            <div class="carousel-indicators" id="carouselIndicators">
-                <div class="indicator active" data-slide="0">
-                    <div class="progress-bar"></div>
+
+            <button class="absolute top-0 bottom-0 left-0 w-24 lg:w-38 bg-transparent text-orange-500 dark:text-orange-400 border-none text-3xl lg:text-5xl cursor-pointer z-10 transition-all duration-300 flex items-center justify-start pl-8 lg:pl-20 hover:text-white hover:shadow-lg" id="prevBtn">‹</button>
+            <button class="absolute top-0 bottom-0 right-0 w-24 lg:w-38 bg-transparent text-orange-500 dark:text-orange-400 border-none text-3xl lg:text-5xl cursor-pointer z-10 transition-all duration-300 flex items-center justify-end pr-8 lg:pr-20 hover:text-white hover:shadow-lg" id="nextBtn">›</button>
+
+            <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex gap-4 z-10" id="carouselIndicators">
+                <div class="w-3 h-3 rounded-full bg-white dark:bg-gray-300 bg-opacity-50 dark:bg-opacity-50 cursor-pointer relative transition-all duration-300 hover:bg-opacity-80 hover:scale-110 indicator active" data-slide="0">
+                    <div class="absolute top-0 left-0 h-full w-full origin-left bg-black dark:bg-gray-800 rounded-full transition-all duration-100 progress-bar"></div>
                 </div>
-                <div class="indicator" data-slide="1">
-                    <div class="progress-bar"></div>
+                <div class="w-3 h-3 rounded-full bg-white dark:bg-gray-300 bg-opacity-50 dark:bg-opacity-50 cursor-pointer relative transition-all duration-300 hover:bg-opacity-80 hover:scale-110 indicator" data-slide="1">
+                    <div class="absolute top-0 left-0 h-full w-full origin-left bg-black dark:bg-gray-800 rounded-full transition-all duration-100 progress-bar"></div>
                 </div>
-                <div class="indicator" data-slide="2">
-                    <div class="progress-bar"></div>
+                <div class="w-3 h-3 rounded-full bg-white dark:bg-gray-300 bg-opacity-50 dark:bg-opacity-50 cursor-pointer relative transition-all duration-300 hover:bg-opacity-80 hover:scale-110 indicator" data-slide="2">
+                    <div class="absolute top-0 left-0 h-full w-full origin-left bg-black dark:bg-gray-800 rounded-full transition-all duration-100 progress-bar"></div>
                 </div>
             </div>
         </div>
     </section>
-
-    <div class="navegador" id="navegador">
+    
+    <div class="navegador hidden md:flex justify-center items-center mt-6 mb-12 overflow-x-auto transition-all duration-300 ease-in-out"
+    id="navegador" style="background-color: var(--bg-primary);">
         <nav>
-            <ul>
-                <div class="nav-div">
+            <ul class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 p-2 list-none">
+                <div class="flex flex-col items-center text-center text-sm">
                     <a href="index.html">
-                        <img src="./imagenes/Navegador/Inicio.png" alt="Logo" class="img-nav">
+                        <img src="./imagenes/Navegador/Inicio.png" alt="Logo" class="h-28 w-28 object-contain">
                     </a>
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="index.html" class="no-underline font-semibold" style="color: var(--text-producto);">Inicio</a></li>
                 </div>
-                <div class="nav-div">
+                <div class="flex flex-col items-center text-center text-sm">
                     <a href="Cervezas.html">
-                        <img src="./imagenes/Navegador/Cervezas.png" alt="Imagen de Cervezas" class="img-nav">
+                        <img src="./imagenes/Navegador/Cervezas.png" alt="Imagen de Cervezas" class="h-28 w-28 object-contain">
                     </a>
-                    <li><a href="Cervezas.html">Cervezas</a></li>
+                    <li><a href="Cervezas.html" class="no-underline font-semibold" style="color: var(--text-producto);">Cervezas</a></li>
                 </div>
-                <div class="nav-div">
+                <div class="flex flex-col items-center text-center text-sm">
                     <a href="Licores.html">
-                        <img src="./imagenes/Navegador/Licores.png" alt="Imagen de Licores" class="img-nav">
+                        <img src="./imagenes/Navegador/Licores.png" alt="Imagen de Licores" class="h-28 w-28 object-contain">
                     </a>
-                    <li><a href="Licores.html">Licores</a></li> 
+                    <li><a href="Licores.html" class="no-underline font-semibold" style="color: var(--text-producto);">Licores</a></li>
                 </div>
-                <div class="nav-div">
+                <div class="flex flex-col items-center text-center text-sm">
                     <a href="Comidas.html">
-                        <img src="./imagenes/Navegador/Comidas.png" alt="Imagen de una hamburguesa" class="img-nav">
+                        <img src="./imagenes/Navegador/Comidas.png" alt="Imagen de una hamburguesa" class="h-28 w-28 object-contain">
                     </a>
-                    <li><a href="Comidas.html">Comidas</a></li>
+                    <li><a href="Comidas.html" class="no-underline font-semibold" style="color: var(--text-producto);">Comidas</a></li>
                 </div>
-                <div class="nav-div">
+                <div class="flex flex-col items-center text-center text-sm">
                     <a href="Bebidas.html">
-                        <img src="./imagenes/Navegador/Bebidas.png" alt="Imagen de Gaseosas" class="img-nav">
+                        <img src="./imagenes/Navegador/Bebidas.png" alt="Imagen de Gaseosas" class="h-28 w-28 object-contain">
                     </a>
-                    <li><a href="Bebidas.html">Bebidas</a></li>
+                    <li><a href="Bebidas.html" class="no-underline font-semibold" style="color: var(--text-producto);">Bebidas</a></li>
                 </div>
-                <div class="nav-div">
+                <div class="flex flex-col items-center text-center text-sm">
                     <a href="Antojos.html">
-                        <img src="./imagenes/Navegador/Antojos.png" alt="Imagen de Chocolates" class="img-nav">
+                        <img src="./imagenes/Navegador/Antojos.png" alt="Imagen de Chocolates" class="h-28 w-28 object-contain">
                     </a>
-                    <li><a href="Antojos.html">Antojos</a></li>   
+                    <li><a href="Antojos.html" class="no-underline font-semibold" style="color: var(--text-producto);">Antojos</a></li>
                 </div>
-                <div class="nav-div">
+                <div class="flex flex-col items-center text-center text-sm">
                     <a href="Helados.html">
-                        <img src="./imagenes/Navegador/Helados.png" alt="Imagen de un bote de helado" class="img-nav">
+                        <img src="./imagenes/Navegador/Helados.png" alt="Imagen de un bote de helado" class="h-28 w-28 object-contain">
                     </a>
-                    <li><a href="Helados.html">Helados</a></li>
+                    <li><a href="Helados.html" class="no-underline font-semibold" style="color: var(--text-producto);">Helados</a></li>
                 </div>
-                <div class="nav-div">
+                <div class="flex flex-col items-center text-center text-sm">
                     <a href="Despensa.html">
-                        <img src="./imagenes/Navegador/Despensa.png" alt="Imagen de Aceites" class="img-nav">
+                        <img src="./imagenes/Navegador/Despensa.png" alt="Imagen de Aceites" class="h-28 w-28 object-contain">
                     </a>
-                    <li><a href="Despensa.html">Despensa</a></li>
+                    <li><a href="Despensa.html" class="no-underline font-semibold" style="color: var(--text-producto);">Despensa</a></li>
                 </div>
             </ul>
         </nav>
     </div>
 
-    <main>
-        <div class="contenido-main">
+    <main class="p-5 flex-grow flex flex-col" style="background-color: var(--bg-secondary);">
+        <div class="max-w-screen-xl mx-auto w-full">
 
-            <!-- Sección de Cervezas -->
-
-            <p class="titulos">Cervezas</p>
-            <section class="productos-destacados">
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Cervezas1.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Cerveza Tres Cruces Lager Six Pack Lata 355ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 24.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+            <p class="text-2xl mb-8 font-semibold" style="color: var(--text-producto);">Cervezas</p>
+            <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-16 ">
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col " style="background-color: var(--bg-card); ">
+                    <img src="./imagenes/Productos/Cervezas1.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Cerveza Tres Cruces Lager Six Pack Lata 355ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 24.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Cervezas2.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Cerveza De Malta Y Maiz Dragenburg Sixpack 310 Ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 18.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Cervezas2.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Cerveza De Malta Y Maiz Dragenburg Sixpack 310 Ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 18.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Cervezas3.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Cerveza Coronita Six Pack Botella 210 ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 20.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Cervezas3.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Cerveza Coronita Six Pack Botella 210 ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 20.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Cervezas4.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Cerveza Heineken Fourpack Lata 473 ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 27.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Cervezas4.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Cerveza Heineken Fourpack Lata 473 ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 27.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Cervezas5.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Cerveza Tres Cruces Light Six Pack Lata X 310 Ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 23.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Cervezas5.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Cerveza Tres Cruces Light Six Pack Lata X 310 Ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 23.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Cervezas6.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Cerveza Pilsen Callao Six Pack Lata 355 ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 28.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Cervezas6.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Cerveza Pilsen Callao Six Pack Lata 355 ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 28.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <div class="ver-mas">
-                            <button class="button-add" aria-label="Añadir" onclick="window.location.href='./Cervezas.html'">+</button>
-                            <span>Ver más</span>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <div class="rounded-md no-underline font-bold flex justify-center flex-col items-center w-full h-full">
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir" onclick="window.location.href='./Cervezas.html'">+</button>
+                        <span>Ver más</span>
                     </div>
+                </div>
             </section>
 
-            <!-- Sección de Licores -->
-
-            <p class="titulos">Licores</p>
-            <section class="productos-destacados">
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Licores1.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack 2 Cartavio Añejo Black 1L</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 72.00</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+            <p class="text-2xl mb-8 font-semibold" style="color: var(--text-producto);">Licores</p>
+            <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-16">
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col " style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Licores1.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack 2 Cartavio Añejo Black 1L</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 72.00</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Licores2.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack 2 Ron Black Barrel 1L</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 91.00</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Licores2.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack 2 Ron Black Barrel 1L</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 91.00</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Licores3.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack 2 Ron Cartavio Añejo Black 750ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 62.00</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Licores3.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack 2 Ron Cartavio Añejo Black 750ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 62.00</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Licores4.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack 2 Vodka Russkaya Apple 750ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 53.80</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Licores4.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack 2 Vodka Russkaya Apple 750ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 53.80</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Licores5.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Ron Cartavio Black 1 L</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 34.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Licores5.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Ron Cartavio Black 1 L</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 34.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Licores6.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Ron Cartavio Black 750 ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 29.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Licores6.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Ron Cartavio Black 750 ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 29.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <div class="ver-mas">
-                            <button class="button-add" aria-label="Añadir" onclick="window.location.href='./Licores.html'">+</button>
-                            <span>Ver más</span>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <div class="rounded-md no-underline font-bold flex justify-center flex-col items-center w-full h-full">
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir" onclick="window.location.href='./Licores.html'">+</button>
+                        <span>Ver más</span>
                     </div>
+                </div>
             </section>
 
-            <!-- Sección de Comidas -->
-
-            <p class="titulos">Comidas</p>
-            <section class="productos-destacados">
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Comidas1.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Hamburguesa Prime de Cerdo Miel de Maple 1 und</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 12.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+            <p class="text-2xl mb-8 font-semibold" style="color: var(--text-producto);">Comidas</p>
+            <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-16">
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Comidas1.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Hamburguesa Prime de Cerdo Miel de Maple 1 und</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 12.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Comidas2.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (3 Empanada De Carne + 3 Empanada De Pollo + 1 Coca Cola x 1 Lt)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 25.60</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Comidas2.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (3 Empanada De Carne + 3 Empanada De Pollo + 1 Coca Cola x 1 Lt)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 25.60</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Comidas3.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Sandwich Prime Pulled Pork</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 12.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Comidas3.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Sandwich Prime Pulled Pork</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 12.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Comidas4.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Hamburguesa Prime de Res Tocino Queso 1 und</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 12.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Comidas4.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Hamburguesa Prime de Res Tocino Queso 1 und</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 12.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Comidas5.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (5 Empanada De Carne + 5 Empanada De Pollo + 1 Coca Cola x 1 Lt)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 39.20</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Comidas5.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (5 Empanada De Carne + 5 Empanada De Pollo + 1 Coca Cola x 1 Lt)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 39.20</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Comidas6.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (10 Empanada De Carne)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 34.00</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Comidas6.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (10 Empanada De Carne)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 34.00</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <div class="ver-mas">
-                            <button class="button-add" aria-label="Añadir" onclick="window.location.href='./Comidas.html'">+</button>
-                            <span>Ver más</span>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <div class="rounded-md no-underline font-bold flex justify-center flex-col items-center w-full h-full">
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir" onclick="window.location.href='./Comidas.html'">+</button>
+                        <span>Ver más</span>
                     </div>
+                </div>
             </section>
 
-            <!-- Sección de Bebidas -->
-
-            <p class="titulos">Bebidas</p>
-            <section class="productos-destacados">
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Bebidas1.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (1 Rehidratante Life SOS Recovery Sabor Tropical + 1 Rehidratante Life SOS Relax Sabor Mix de Frutas) Lata 355ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 11.80</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+            <p class="text-2xl mb-8 font-semibold" style="color: var(--text-producto);">Bebidas</p>
+            <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-16">
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Bebidas1.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (1 Rehidratante Life SOS Recovery Sabor Tropical + 1 Rehidratante Life SOS Relax Sabor Mix de Frutas) Lata 355ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 11.80</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Bebidas2.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (2 Coca Cola x 1 Lt)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 10.40</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Bebidas2.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (2 Coca Cola x 1 Lt)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 10.40</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Bebidas3.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (3 Schweppes Ginger Ale x 1.5 Lt)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 23.70</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Bebidas3.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (3 Schweppes Ginger Ale x 1.5 Lt)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 23.70</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Bebidas4.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (4 Coca Cola x 1 Lt)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 20.80</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Bebidas4.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (4 Coca Cola x 1 Lt)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 20.80</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Bebidas5.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (4 Inca Kola x 1 Lt)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 20.80</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Bebidas5.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (4 Inca Kola x 1 Lt)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 20.80</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Bebidas6.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (2 Energizante Red Bull Sugar Free x 250 Ml)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 17.00</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Bebidas6.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (2 Energizante Red Bull Sugar Free x 250 Ml)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 17.00</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <div class="ver-mas">
-                            <button class="button-add" aria-label="Añadir" onclick="window.location.href='./Bebidas.html'">+</button>
-                            <span>Ver más</span>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <div class="rounded-md no-underline font-bold flex justify-center flex-col items-center w-full h-full">
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir" onclick="window.location.href='./Bebidas.html'">+</button>
+                        <span>Ver más</span>
                     </div>
+                </div>
             </section>
 
-            <!-- Sección de Antojos -->
-
-            <p class="titulos">Antojos</p>
-            <section class="productos-destacados">
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Antojos1.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (2 Inka Chips Jalapeño x 135 Gr)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 17.80</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+            <p class="text-2xl mb-8 font-semibold" style="color: var(--text-producto);">Antojos</p>
+            <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-16">
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Antojos1.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (2 Inka Chips Jalapeño x 135 Gr)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 17.80</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Antojos2.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (2 Inka Chips Queso Y Cebolla x 135 Gr)
-                        </p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 17.80</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Antojos2.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (2 Inka Chips Queso Y Cebolla x 135 Gr)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 17.80</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Antojos3.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack 1 (Keke Pinguino Marinela Cookies Cream 80gr + Keke Pinguino Marinela Triple Chocolate 80gr)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 8.00</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Antojos3.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack 1 (Keke Pinguino Marinela Cookies Cream 80gr + Keke Pinguino Marinela Triple Chocolate 80gr)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 8.00</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Antojos4.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack 2 (Papas Kona Select Original 100 Gr)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 15.80</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Antojos4.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack 2 (Papas Kona Select Original 100 Gr)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 15.80</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Antojos5.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (2 Papas Jappy Snacks BBQ 200 gr)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 15.80</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Antojos5.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (2 Papas Jappy Snacks BBQ 200 gr)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 15.80</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Antojos6.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (2 Papas Jappy Snacks Jalapeño 200 gr)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 15.80</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Antojos6.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (2 Papas Jappy Snacks Jalapeño 200 gr)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 15.80</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <div class="ver-mas">
-                            <button class="button-add" aria-label="Añadir" onclick="window.location.href='./Antojos.html'">+</button>
-                            <span>Ver más</span>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <div class="rounded-md no-underline font-bold flex justify-center flex-col items-center w-full h-full">
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir" onclick="window.location.href='./Antojos.html'">+</button>
+                        <span>Ver más</span>
                     </div>
+                </div>
             </section>
 
-            <!-- Sección de Helados -->
-
-            <p class="titulos">Helados</p>
-            <section class="productos-destacados">
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Helados1.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Helado grand Prix Bombones 216 ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 15.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+            <p class="text-2xl mb-8 font-semibold" style="color: var(--text-producto);">Helados</p>
+            <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-16">
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Helados1.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Helado grand Prix Bombones 216 ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 15.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Helados2.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Helado Donofrio Peziduri Tricolor Cremoso 900 ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 15.99</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Helados2.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Helado Donofrio Peziduri Tricolor Cremoso 900 ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 15.99</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Helados3.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Helado Donofrio Peziduri Chocochips Cremoso 900 ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 15.99</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Helados3.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Helado Donofrio Peziduri Chocochips Cremoso 900 ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 15.99</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Helados4.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Helado Donofrio Peziduri Vainilla Cremoso 900 ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 15.99</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Helados4.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Helado Donofrio Peziduri Vainilla Cremoso 900 ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 15.99</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Helados5.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Helado Gelático Chocobrownie 450ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 7.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Helados5.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Helado Gelático Chocobrownie 450ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 7.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Helados6.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Helado Gelatico Chocochips 930 ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 10.90</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Helados6.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Helado Gelatico Chocochips 930 ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 10.90</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <div class="ver-mas">
-                            <button class="button-add" aria-label="Añadir" onclick="window.location.href='./Helados.html'">+</button>
-                            <span>Ver más</span>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <div class="rounded-md no-underline font-bold flex justify-center flex-col items-center w-full h-full">
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir" onclick="window.location.href='./Helados.html'">+</button>
+                        <span>Ver más</span>
                     </div>
+                </div>
             </section>
 
-            <!-- Sección de Despensa -->
-
-            <p class="titulos">Despensa</p>
-            <section class="productos-destacados">
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Despensa1.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (2 Huevo Pardo La Calera x 15 Und)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 23.80</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+            <p class="text-2xl mb-8 font-semibold" style="color: var(--text-producto);">Despensa</p>
+            <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-16">
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Despensa1.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (2 Huevo Pardo La Calera x 15 Und)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 23.80</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Despensa2.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Pack (3 Bebida Láctea Uht Gloria Pro Triple Zero Chocolate 320 Ml)</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 18.00</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Despensa2.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Pack (3 Bebida Láctea Uht Gloria Pro Triple Zero Chocolate 320 Ml)</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 18.00</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Despensa3.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Keke Bimbo Marmoleado Familiar 380 gr</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 10.50</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Despensa3.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Keke Bimbo Marmoleado Familiar 380 gr</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 10.50</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Despensa4.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Keke Bimbo Naranja Familiar 380 gr</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 10.50</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Despensa4.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Keke Bimbo Naranja Familiar 380 gr</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 10.50</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Despensa5.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Leche UHT Gloria Entera 1 L</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 5.70</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Despensa5.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Leche UHT Gloria Entera 1 L</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 5.70</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <img src="./imagenes/Productos/Despensa6.png" alt="Producto 1" />
-
-                        <p class="producto-descripcion">Bebida Láctea Pro UHT Chocolate 320 ml</p>
-
-                        <div class="price-container">
-                            <span class="precio">S/ 5.80</span>
-                            <button class="button-add" aria-label="Añadir">+</button>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <img src="./imagenes/Productos/Despensa6.png" alt="Producto 1" class="w-full max-w-xs h-auto mx-auto mb-2 object-contain max-h-36" />
+                    <p class="text-base overflow-hidden text-left flex-grow" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;" style="color: var(--text-primary);">Bebida Láctea Pro UHT Chocolate 320 ml</p>
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-base font-bold" style="color: var(--text-primary);">S/ 5.80</span>
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir">+</button>
                     </div>
-
-                    <div class="producto">
-                        <div class="ver-mas">
-                            <button class="button-add" aria-label="Añadir" onclick="window.location.href='./Despensa.html'">+</button>
-                            <span>Ver más</span>
-                        </div>
+                </div>
+                <div class="p-4 text-center rounded-2xl shadow-md flex flex-col" style="background-color: var(--bg-card);">
+                    <div class="rounded-md no-underline font-bold flex justify-center flex-col items-center w-full h-full">
+                        <button class="bg-yellow-500 rounded-full w-9 h-9 flex items-center justify-center border-none text-white cursor-pointer text-2xl leading-none font-mono" aria-label="Añadir" onclick="window.location.href='./Despensa.html'">+</button>
+                        <span>Ver más</span>
                     </div>
+                </div>
             </section>
 
         </div>
-        
+
     </main>
 
-    <footer>
-        <div class="info">
-            <div class="contenido-info">
-                <div class="contenido-infodiv">
-                    <img src="./imagenes/logo.png" alt="Logo del supermercado" class="img-footer">
+    <footer class="text-center relative w-full">
+        <div class="px-5 mb-36 mt-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 max-w-screen-xl mx-auto">
+                <div class="m-2 flex flex-col text-left text-sm" style="color: var(--text-primary);">
+                    <img src="./imagenes/logo.png" alt="Logo del supermercado" class="h-auto w-52">
                 </div>
-                <div class="contenido-infodiv">
-                    <h3>Conócenos</h3>
-                    <a href="Nosotros.html" class="textRedes">Quienes somos</a>
-                    <p class="textRedes">Email: contacto@ennita.pe</p>
-                    <a href="Contacto.html" class="textRedes">Libro de Reclamaciones</a>
-                    
+                <div class="m-2 flex flex-col text-left text-sm" style="color: var(--text-primary);">
+                    <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Conócenos</h3>
+                    <a href="Nosotros.html" class="no-underline mt-2" style="color: var(--text-primary);">Quienes somos</a>
+                    <p class="mt-2" style="color: var(--text-primary);">Email: contacto@ennita.pe</p>
+                    <a href="Contacto.html" class="no-underline mt-2" style="color: var(--text-primary);">Libro de Reclamaciones</a>
                 </div>
-                <div class="contenido-infodiv">
-                    <h3>Redes Sociales</h3>
-                    <a href="https://www.facebook.com/" class="textRedes">Facebook</a>
-                    <a href="https://www.instagram.com/" class="textRedes">Instagram</a>
-                    <a href="https://x.com/" class="textRedes">Twitter</a>
+                <div class="m-2 flex flex-col text-left text-sm" style="color: var(--text-primary);">
+                    <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Redes Sociales</h3>
+                    <a href="https://www.facebook.com/" class="no-underline mt-2" style="color: var(--text-primary);">Facebook</a>
+                    <a href="https://www.instagram.com/" class="no-underline mt-2" style="color: var(--text-primary);">Instagram</a>
+                    <a href="https://x.com/" class="no-underline mt-2" style="color: var(--text-primary);">Twitter</a>
                 </div>
-                <div class="contenido-infodiv">
-                    <h3>Ubicación</h3>
-                    <p class="textRedes">Avenida España 123, Trujillo</p>
-                    <p class="textRedes">Horario: Lunes a Sábado, 8:00 AM - 9:00 PM</p>
+                <div class="m-2 flex flex-col text-left text-sm" style="color: var(--text-primary);">
+                    <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Ubicación</h3>
+                    <p class="mt-2" style="color: var(--text-primary);">Avenida España 123, Trujillo</p>
+                    <p class="mt-2" style="color: var(--text-primary);">Horario: Lunes a Sábado, 8:00 AM - 9:00 PM</p>
                 </div>
-
             </div>
         </div>
-        <div class="contenido-pie">
-            <p>&copy; 2025 Supermercado - Todos los derechos reservados</p>
-            <div class="enlaces-pie">
-                <a href="#" >Política de privacidad</a>
-                <a href="#">Términos de servicio</a>
+        <div class="text-white text-center p-5 relative w-full" style="background-color: var(--color-header);">
+            <p class="text-white">&copy; 2025 Supermercado - Todos los derechos reservados</p>
+            <div class="flex justify-center flex-wrap mt-2 gap-2">
+                <a href="#" class="text-white no-underline hover:underline">Política de privacidad</a>
+                <a href="#" class="text-white no-underline hover:underline">Términos de servicio</a>
             </div>
         </div>
     </footer>

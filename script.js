@@ -1,3 +1,50 @@
+document.addEventListener('DOMContentLoaded', () => {
+    new DarkModeToggle();
+    new ConnectionMonitor();
+    initializeAnimations();
+    initializeSmoothScrolling();
+    try {
+        const carousel = new EnhancedCarousel();
+        
+        const whatsappButton = new WhatsAppButton('51987654321', 'Hola, me interesa conocer más sobre sus productos del supermercado');
+        
+        let hamburgerMenu = null;
+        const initHamburgerMenu = () => {
+            if (window.innerWidth <= 768 && !hamburgerMenu) {
+                hamburgerMenu = new HamburgerMenu();
+            } else if (window.innerWidth > 768 && hamburgerMenu) {
+                hamburgerMenu.close();
+            }
+        };
+        
+        initHamburgerMenu();
+
+        new SmoothScroll();
+        new HeaderEffects();
+        new PerformanceOptimizer();
+
+        const debouncedResize = debounce(() => {
+            initHamburgerMenu();
+
+            if (carousel) {
+                carousel.updateCarousel();
+                carousel.updateIndicators();
+            }
+        }, 250);
+        
+        window.addEventListener('resize', debouncedResize);
+
+        window.addEventListener('beforeunload', () => {
+            if (carousel) {
+                carousel.destroy();
+            }
+        });
+        
+    } catch (error) {
+        console.error('Error inicializando la aplicación:', error);
+    }
+});
+
 class EnhancedCarousel {
     constructor() {
         this.currentSlide = 0;
@@ -7,7 +54,7 @@ class EnhancedCarousel {
         this.isPaused = false;
         this.progressDuration = 5000;
         this.transitionDuration = 500;
-        
+        this.indicatorTransitionDuration = 300;
         this.carousel = document.getElementById('carousel');
         this.carouselImages = document.getElementById('carouselImages');
         this.indicators = document.querySelectorAll('.indicator');
@@ -118,9 +165,10 @@ class EnhancedCarousel {
                 progressBar.offsetHeight;
                 
                 if (isActive && this.isPlaying && !this.isPaused) {
-                    progressBar.style.animation = `progressFill ${this.progressDuration}ms linear forwards`;
+                    const fillDuration = this.progressDuration - this.indicatorTransitionDuration;
+                    progressBar.style.animation = `progressFill ${fillDuration}ms linear ${this.indicatorTransitionDuration}ms forwards`;
                 } else {
-                    progressBar.style.width = '0%';
+                    progressBar.style.transform = 'scaleX(0)';
                 }
             }
         });
@@ -150,7 +198,7 @@ class EnhancedCarousel {
             const progressBar = indicator.querySelector('.progress-bar');
             if (progressBar) {
                 progressBar.style.animation = 'none';
-                progressBar.style.width = '0%';
+                progressBar.style.transform = 'scaleX(0)';
             }
         });
     }
@@ -160,13 +208,6 @@ class EnhancedCarousel {
         this.isPlaying = true;
         this.isPaused = false;
         this.startAutoplay();
-    }
-    
-    resetAutoplay() {
-        this.stopAutoplay();
-        if (this.isPlaying && !this.isPaused) {
-            setTimeout(() => this.startAutoplay(), 100);
-        }
     }
     
     pauseAutoplay() {
@@ -192,20 +233,9 @@ class EnhancedCarousel {
             if (progressBar && progressBar.style.animation !== 'none') {
                 progressBar.style.animationPlayState = 'running';
             } else {
-                this.resetAutoplay();
+                this.restartAutoplay();
             }
         }
-    }
-    
-    play() {
-        this.isPlaying = true;
-        this.isPaused = false;
-        this.startAutoplay();
-    }
-    
-    pause() {
-        this.isPlaying = false;
-        this.stopAutoplay();
     }
     
     destroy() {
@@ -294,87 +324,6 @@ class WhatsAppButton {
         this.message = encodeURIComponent(newMessage);
         const link = this.button.querySelector('a');
         link.href = `https://wa.me/${this.phoneNumber}?text=${this.message}`;
-    }
-}
-
-class HamburgerMenu {
-    constructor() {
-        this.hamburgerMenu = document.getElementById('hamburgerMenu');
-        this.navegador = document.getElementById('navegador');
-        this.overlay = document.getElementById('overlay');
-        this.isOpen = false;
-        this.body = document.body;
-        
-        if (!this.hamburgerMenu || !this.navegador) {
-            console.warn('Elementos del menú hamburguesa no encontrados');
-            return;
-        }
-        
-        this.init();
-    }
-    
-    init() {
-        this.hamburgerMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.toggle();
-        });
-        
-        this.overlay?.addEventListener('click', () => this.close());
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.isOpen) {
-                this.close();
-            }
-        });
-        
-        const menuLinks = this.navegador.querySelectorAll('a');
-        menuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                setTimeout(() => this.close(), 100);
-            });
-        });
-        
-        this.navegador.addEventListener('touchmove', (e) => {
-            if (this.isOpen) {
-                e.stopPropagation();
-            }
-        }, { passive: false });
-    }
-    
-    toggle() {
-        if (this.isOpen) {
-            this.close();
-        } else {
-            this.open();
-        }
-    }
-    
-    open() {
-        this.isOpen = true;
-        this.hamburgerMenu.classList.add('active');
-        this.navegador.classList.add('active');
-        this.overlay?.classList.add('active');
-        
-        this.body.style.overflow = 'hidden';
-        this.body.style.position = 'fixed';
-        this.body.style.width = '100%';
-        
-        this.navegador.setAttribute('aria-expanded', 'true');
-        this.hamburgerMenu.setAttribute('aria-expanded', 'true');
-    }
-    
-    close() {
-        this.isOpen = false;
-        this.hamburgerMenu.classList.remove('active');
-        this.navegador.classList.remove('active');
-        this.overlay?.classList.remove('active');
-        
-        this.body.style.overflow = '';
-        this.body.style.position = '';
-        this.body.style.width = '';
-        
-        this.navegador.setAttribute('aria-expanded', 'false');
-        this.hamburgerMenu.setAttribute('aria-expanded', 'false');
     }
 }
 
@@ -516,51 +465,6 @@ const throttle = (func, limit) => {
         }
     };
 };
-
-document.addEventListener('DOMContentLoaded', () => {
-    new DarkModeToggle();
-    new ConnectionMonitor();
-    try {
-        const carousel = new EnhancedCarousel();
-        
-        const whatsappButton = new WhatsAppButton('51987654321', 'Hola, me interesa conocer más sobre sus productos del supermercado');
-        
-        let hamburgerMenu = null;
-        const initHamburgerMenu = () => {
-            if (window.innerWidth <= 768 && !hamburgerMenu) {
-                hamburgerMenu = new HamburgerMenu();
-            } else if (window.innerWidth > 768 && hamburgerMenu) {
-                hamburgerMenu.close();
-            }
-        };
-        
-        initHamburgerMenu();
-
-        new SmoothScroll();
-        new HeaderEffects();
-        new PerformanceOptimizer();
-
-        const debouncedResize = debounce(() => {
-            initHamburgerMenu();
-
-            if (carousel) {
-                carousel.updateCarousel();
-                carousel.updateIndicators();
-            }
-        }, 250);
-        
-        window.addEventListener('resize', debouncedResize);
-
-        window.addEventListener('beforeunload', () => {
-            if (carousel) {
-                carousel.destroy();
-            }
-        });
-        
-    } catch (error) {
-        console.error('Error inicializando la aplicación:', error);
-    }
-});
 
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
@@ -825,14 +729,6 @@ class ConnectionMonitor {
     
 }
 
-
-// Base de datos de usuarios simulada
-const usuariosValidos = [
-    { usuario: "admin", password: "123456" },
-    { usuario: "user", password: "password" },
-    { usuario: "demo", password: "demo" }
-];
-
 document.addEventListener('DOMContentLoaded', function() {
     const usuarioActivo = localStorage.getItem('usuarioActivo');
     const currentPage = window.location.pathname.split('/').pop();
@@ -855,6 +751,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (currentPage === 'login.html') {
         inicializarLogin();
+        inicializarLoginMejorado(); 
     } else if (currentPage === 'carrito.html') {
         cargarCarrito();
     } else if (currentPage === 'cuenta.html') {
@@ -863,6 +760,11 @@ document.addEventListener('DOMContentLoaded', function() {
         inicializarProductos();
     }
 });
+const usuariosValidos = [
+    { usuario: "admin", password: "123456" },
+    { usuario: "user", password: "password" },
+    { usuario: "demo", password: "demo" }
+];
 
 function inicializarLogin() {
     const loginForm = document.getElementById('loginForm');
@@ -870,6 +772,40 @@ function inicializarLogin() {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             validarLogin();
+        });
+    }
+}
+
+function inicializarLoginMejorado() {
+    const themeToggle = document.getElementById('themeToggle');
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+    
+    // Theme Toggle
+    if (themeToggle) {
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const newTheme = theme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    }
+
+    // Password Toggle
+    if (togglePassword && passwordInput && eyeIcon) {
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            
+            if (type === 'text') {
+                eyeIcon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>';
+            } else {
+                eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+            }
         });
     }
 }
@@ -935,38 +871,102 @@ function agregarAlCarrito(nombre, precio) {
 function actualizarTotalCarrito() {
     const carrito = obtenerCarrito();
     const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+    const totalProductos = carrito.reduce((sum, item) => sum + item.cantidad, 0);
     
-    const carritoSpan = document.querySelector('.cuenta-carrito span:last-child');
-    if (carritoSpan) {
-        carritoSpan.textContent = `Carrito (S/ ${total.toFixed(2)})`;
+    const badgeDesktop = document.getElementById('carrito-badge');
+    if (badgeDesktop) {
+        badgeDesktop.textContent = totalProductos;
     }
+    
+    const totalDesktop = document.getElementById('carrito-total');
+    if (totalDesktop) {
+        totalDesktop.textContent = `Carrito (S/ ${total.toFixed(2)})`;
+    }
+    
+    const totalMobile = document.getElementById('carrito-total-mobile');
+    if (totalMobile) {
+        totalMobile.textContent = `Carrito (S/ ${total.toFixed(2)})`;
+    }
+    
+    const badges = document.querySelectorAll('a[href="carrito.html"] .absolute.bg-red-500');
+    badges.forEach(badge => {
+        if (!badge.id) {
+            badge.textContent = totalProductos;
+        }
+    });
+    
+    const carritoLinks = document.querySelectorAll('a[href="carrito.html"]');
+    carritoLinks.forEach(link => {
+        const spans = link.querySelectorAll('span');
+        spans.forEach(span => {
+            if (span.textContent.includes('Carrito') && !span.id) {
+                span.textContent = `Carrito (S/ ${total.toFixed(2)})`;
+            }
+        });
+    });
 }
 
 function inicializarProductos() {
-    const productos = document.querySelectorAll('.producto');
+    const productosTailwind = document.querySelectorAll('.grid > div.p-4');
     
-    productos.forEach(producto => {
-        const botonAgregar = producto.querySelector('.btn-agregar, .boton-agregar, button');
+    productosTailwind.forEach(producto => {
+        const botonAgregar = producto.querySelector('button[aria-label="Añadir"]');
         
-        if (botonAgregar && botonAgregar.textContent.includes('+')) {
+        if (botonAgregar && botonAgregar.textContent.trim() === '+' && !botonAgregar.dataset.initialized) {
+            botonAgregar.dataset.initialized = 'true';
+            
             botonAgregar.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                const nombre = producto.querySelector('.producto-descripcion, .nombre-producto, h3')?.textContent?.trim();
-                const precioElement = producto.querySelector('.precio');
+                const nombre = producto.querySelector('p')?.textContent?.trim();
+                const precioElement = producto.querySelector('span.font-bold');
                 const precioTexto = precioElement?.textContent?.replace('S/', '').replace(',', '').trim();
                 const precio = parseFloat(precioTexto);
                 
                 if (nombre && !isNaN(precio)) {
                     agregarAlCarrito(nombre, precio);
                     
-                    // Feedback visual
-                    botonAgregar.style.background = '#4CAF50';
-                    botonAgregar.textContent = '✓';
+                    const originalBg = botonAgregar.className;
+                    const originalContent = botonAgregar.innerHTML;
+                    botonAgregar.className = botonAgregar.className.replace('bg-yellow-500', 'bg-green-500');
+                    botonAgregar.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>';
                     
                     setTimeout(() => {
-                        botonAgregar.style.background = '';
-                        botonAgregar.textContent = '+';
+                        botonAgregar.className = originalBg;
+                        botonAgregar.innerHTML = originalContent;
+                    }, 1000);
+                }
+            });
+        }
+    });
+    
+    const productosTradicional = document.querySelectorAll('.producto');
+    
+    productosTradicional.forEach(producto => {
+        const botonAgregar = producto.querySelector('.button-add, button[aria-label="Añadir"]');
+        
+        if (botonAgregar && botonAgregar.textContent.trim() === '+' && !botonAgregar.dataset.initialized) {
+            botonAgregar.dataset.initialized = 'true';
+            
+            botonAgregar.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const nombre = producto.querySelector('.producto-descripcion, p')?.textContent?.trim();
+                const precioElement = producto.querySelector('.precio, span.precio');
+                const precioTexto = precioElement?.textContent?.replace('S/', '').replace(',', '').trim();
+                const precio = parseFloat(precioTexto);
+                
+                if (nombre && !isNaN(precio)) {
+                    agregarAlCarrito(nombre, precio);
+                    
+                    const originalBg = botonAgregar.style.background;
+                    const originalContent = botonAgregar.innerHTML;
+                    botonAgregar.style.background = '#4CAF50';
+                    botonAgregar.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px; margin: auto;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>';
+                    
+                    setTimeout(() => {
+                        botonAgregar.style.background = originalBg;
+                        botonAgregar.innerHTML = originalContent;
                     }, 1000);
                 }
             });
@@ -1085,14 +1085,18 @@ function cargarCarrito() {
                     <p>Precio: S/ ${item.precio.toFixed(2)}</p>
                 </div>
                 <div class="item-cantidad">
-                    <button onclick="cambiarCantidad(${index}, -1)">-</button>
+                    <button onclick="cambiarCantidad(${index}, -1)" style="display: flex; align-items: center; justify-content: center;">-</button>
                     <span>${item.cantidad}</span>
-                    <button onclick="cambiarCantidad(${index}, 1)">+</button>
+                    <button onclick="cambiarCantidad(${index}, 1)" style="display: flex; align-items: center; justify-content: center;">+</button>
                 </div>
                 <div class="item-subtotal">
                     <p>S/ ${subtotal.toFixed(2)}</p>
                 </div>
-                <button onclick="eliminarItem(${index})" class="btn-eliminar">🗑️</button>
+                <button onclick="eliminarItem(${index})" class="btn-eliminar" style="display: flex; align-items: center; justify-content: center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </button>
             </div>
         `;
     });
@@ -1128,4 +1132,101 @@ function vaciarCarrito() {
         cargarCarrito();
         actualizarTotalCarrito();
     }
+}
+
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const hamburgerMenu = document.getElementById('hamburgerMenu');
+const closeMenuBtn = document.getElementById('closeMenuBtn');
+const menuOverlay = document.getElementById('menuOverlay');
+const hamburgerIcon = document.getElementById('hamburgerIcon');
+
+function openMenu() {
+    hamburgerMenu.classList.remove('-translate-x-full');
+    hamburgerMenu.classList.add('translate-x-0');
+    menuOverlay.classList.remove('opacity-0', 'invisible');
+    menuOverlay.classList.add('opacity-100', 'visible');
+    hamburgerIcon.innerHTML = `
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    `;
+    document.body.classList.add('overflow-hidden');
+}
+
+function closeMenu() {
+    hamburgerMenu.classList.add('-translate-x-full');
+    hamburgerMenu.classList.remove('translate-x-0');
+    menuOverlay.classList.add('opacity-0', 'invisible');
+    menuOverlay.classList.remove('opacity-100', 'visible');
+    hamburgerIcon.innerHTML = `
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    `;
+    document.body.classList.remove('overflow-hidden');
+}
+
+hamburgerBtn.addEventListener('click', () => {
+    if (hamburgerMenu.classList.contains('-translate-x-full')) {
+        openMenu();
+    } else {
+        closeMenu();
+    }
+});
+
+closeMenuBtn.addEventListener('click', closeMenu);
+menuOverlay.addEventListener('click', closeMenu);
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeMenu();
+    }
+});
+
+function initializeAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+    
+    const animatedElements = document.querySelectorAll('main .flex-1, section .bg-white, .bg-gray-100, .grid > div');
+    animatedElements.forEach(el => observer.observe(el));
+    
+    addAnimationStyles();
+}
+
+function addAnimationStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        main .flex-1, section .bg-white, .bg-gray-100, .grid > div {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        main .flex-1.animate-in, section .bg-white.animate-in, .bg-gray-100.animate-in, .grid > div.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+function initializeSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 }

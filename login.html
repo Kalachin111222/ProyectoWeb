@@ -3,30 +3,471 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Iniciar Sesión - Supermercado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --border-color: #eeeeee;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --accent-color: #0d47a1;
+            --accent-hover: #0a3782;
+            --success-color: #4CAF50;
+            --error-color: #dc2626;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-card: #2d2d2d;
+            --text-primary: #E0E0E0;
+            --text-secondary: #cccccc;
+            --border-color: #444444;
+            --shadow: rgba(0, 0, 0, 0.5);
+            --accent-color: #4a90e2;
+            --accent-hover: #357abd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+
+        .login-container {
+            background: var(--bg-card);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px var(--shadow);
+            padding: 40px;
+            max-width: 450px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.6s ease-out;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(13, 71, 161, 0.3);
+        }
+
+        .logo-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+
+        h2 {
+            color: var(--text-primary);
+            font-size: 28px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            fill: var(--text-secondary);
+            transition: fill 0.3s ease;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 15px;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: var(--bg-card);
+            box-shadow: 0 0 0 4px rgba(13, 71, 161, 0.1);
+        }
+
+        .input-group input:focus + .input-icon {
+            fill: var(--accent-color);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-toggle svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-secondary);
+            transition: fill 0.3s ease;
+        }
+
+        .password-toggle:hover svg {
+            fill: var(--accent-color);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 15px rgba(13, 71, 161, 0.3);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(13, 71, 161, 0.4);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            background: #fee;
+            color: var(--error-color);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 14px;
+            border-left: 4px solid var(--error-color);
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .credentials-info {
+            margin-top: 25px;
+            padding: 15px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .credentials-info .title {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .credentials-info span {
+            display: block;
+            color: var(--text-primary);
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle .sun-icon {
+            display: none;
+        }
+
+        .theme-toggle .moon-icon {
+            display: block;
+        }
+
+        [data-theme="dark"] .theme-toggle .sun-icon {
+            display: block;
+        }
+
+        [data-theme="dark"] .theme-toggle .moon-icon {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .logo-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .logo-icon svg {
+                width: 30px;
+                height: 30px;
+            }
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.8);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .whatsapp-float.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .whatsapp-float a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            border-radius: 50%;
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .whatsapp-float a:hover,
+        .whatsapp-float.hover a {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+            background: linear-gradient(135deg, #128c7e, #25d366);
+            width: auto;
+            border-radius: 30px;
+            padding: 0 20px;
+        }
+
+        .whatsapp-float .whatsapp-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        .whatsapp-float .whatsapp-text {
+            margin-left: 10px;
+            font-weight: 500;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            width: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover .whatsapp-text,
+        .whatsapp-float.hover .whatsapp-text {
+            opacity: 1;
+            width: auto;
+        }
+    </style>
 </head>
 <body>
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+        <svg class="sun-icon" viewBox="0 0 24 24">
+            <path d="M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0-2a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm0-3v2M4.22 4.22l1.42 1.42M2 12h2m1.64 6.36l1.42-1.42M12 19v2m4.95-1.64l1.42 1.42M19 12h2m-1.64-6.36l-1.42 1.42"/>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M12.34 2.02c5.08.87 8.66 5.36 8.66 10.98 0 6.08-4.92 11-11 11-5.62 0-10.11-3.58-10.98-8.66-.1-.58.39-1.07.98-.97 4.27.73 8.04-2.87 8.04-7.35 0-1.09-.2-2.13-.56-3.09-.2-.53.25-1.03.86-.91z"/>
+        </svg>
+    </button>
+
     <div class="login-container">
-        <h2>Iniciar Sesión</h2>
+        <div class="logo-container">
+            <div class="logo-icon">
+                <img src="./imagenes/logo.png" alt="Logo del supermercado" style="width: 100%; height: 100%; object-fit: contain; border-radius: 50%;">
+            </div>
+            <h2>Bienvenido</h2>
+            <p class="subtitle">Ingresa a tu cuenta para continuar</p>
+        </div>
+
         <form id="loginForm">
             <div class="input-group">
-                <label for="usuario">Usuario:</label>
-                <input type="text" id="usuario" name="usuario" required>
+                <label for="usuario">Usuario</label>
+                <div class="input-wrapper">
+                    <svg class="input-icon" viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                    <input type="text" id="usuario" name="usuario" required placeholder="Ingresa tu usuario">
+                </div>
             </div>
+
             <div class="input-group">
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="password">Contraseña</label>
+                <div class="input-wrapper">
+                    <svg class="input-icon" viewBox="0 0 24 24">
+                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                    </svg>
+                    <input type="password" id="password" name="password" required placeholder="Ingresa tu contraseña">
+                    <button type="button" class="password-toggle" id="togglePassword">
+                        <svg viewBox="0 0 24 24" id="eyeIcon">
+                            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <button type="submit" class="btn-login">Ingresar</button>
+
+            <button type="submit" class="btn-login">Iniciar Sesión</button>
         </form>
+
         <div id="error-message" class="error-message" style="display: none;"></div>
-        <br>
-        <span>Usuario: admin</span>
-        <br>
-        <span>Contraseña: 123456</span>
+
+        <div class="credentials-info">
+            <div class="title">Credenciales de prueba</div>
+            <span>👤 Usuario: admin</span>
+            <span>🔒 Contraseña: 123456</span>
+        </div>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
