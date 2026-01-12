@@ -18,6 +18,10 @@
             --accent-hover: #0a3782;
             --success-color: #4CAF50;
             --error-color: #dc2626;
+            --google-bg: #ffffff;
+            --google-border: #dadce0;
+            --google-hover: #f8f9fa;
+            --google-text: #3c4043;
         }
 
         [data-theme="dark"] {
@@ -30,6 +34,10 @@
             --shadow: rgba(0, 0, 0, 0.5);
             --accent-color: #4a90e2;
             --accent-hover: #357abd;
+            --google-bg: #3c4043;
+            --google-border: #5f6368;
+            --google-hover: #4d5156;
+            --google-text: #e8eaed;
         }
 
         * {
@@ -42,13 +50,19 @@
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
             min-height: 100vh;
+            width: 100vw;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 15px;
             transition: background 0.3s ease;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
+        }
+        
+        html {
+            overflow-x: hidden;
+            width: 100%;
         }
 
         body::before {
@@ -77,9 +91,10 @@
             background: var(--bg-card);
             border-radius: 20px;
             box-shadow: 0 20px 60px var(--shadow);
-            padding: 40px;
+            padding: clamp(20px, 5vw, 40px);
             max-width: 450px;
-            width: 100%;
+            width: calc(100% - 20px);
+            margin: 0 auto;
             position: relative;
             z-index: 1;
             animation: slideUp 0.6s ease-out;
@@ -100,12 +115,12 @@
 
         .logo-container {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: clamp(20px, 4vw, 30px);
         }
 
         .logo-icon {
-            width: 80px;
-            height: 80px;
+            width: clamp(60px, 15vw, 80px);
+            height: clamp(60px, 15vw, 80px);
             background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
             border-radius: 50%;
             display: inline-flex;
@@ -116,14 +131,14 @@
         }
 
         .logo-icon svg {
-            width: 40px;
-            height: 40px;
+            width: clamp(30px, 8vw, 40px);
+            height: clamp(30px, 8vw, 40px);
             fill: white;
         }
 
         h2 {
             color: var(--text-primary);
-            font-size: 28px;
+            font-size: clamp(22px, 5vw, 28px);
             font-weight: 600;
             text-align: center;
             margin-bottom: 10px;
@@ -132,12 +147,12 @@
         .subtitle {
             color: var(--text-secondary);
             text-align: center;
-            font-size: 14px;
-            margin-bottom: 30px;
+            font-size: clamp(13px, 3vw, 14px);
+            margin-bottom: clamp(20px, 4vw, 30px);
         }
 
         .input-group {
-            margin-bottom: 25px;
+            margin-bottom: clamp(18px, 4vw, 25px);
             position: relative;
         }
 
@@ -146,7 +161,7 @@
             color: var(--text-primary);
             font-weight: 500;
             margin-bottom: 8px;
-            font-size: 14px;
+            font-size: clamp(13px, 3vw, 14px);
         }
 
         .input-wrapper {
@@ -162,14 +177,15 @@
             height: 20px;
             fill: var(--text-secondary);
             transition: fill 0.3s ease;
+            pointer-events: none;
         }
 
         .input-group input {
             width: 100%;
-            padding: 14px 15px 14px 45px;
+            padding: clamp(12px, 3vw, 14px) clamp(12px, 3vw, 15px) clamp(12px, 3vw, 14px) clamp(40px, 10vw, 45px);
             border: 2px solid var(--border-color);
             border-radius: 12px;
-            font-size: 15px;
+            font-size: clamp(14px, 3.5vw, 15px);
             color: var(--text-primary);
             background: var(--bg-secondary);
             transition: all 0.3s ease;
@@ -183,7 +199,7 @@
             box-shadow: 0 0 0 4px rgba(13, 71, 161, 0.1);
         }
 
-        .input-group input:focus + .input-icon {
+        .input-group input:focus ~ .input-icon {
             fill: var(--accent-color);
         }
 
@@ -199,6 +215,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 2;
         }
 
         .password-toggle svg {
@@ -214,12 +231,12 @@
 
         .btn-login {
             width: 100%;
-            padding: 14px;
+            padding: clamp(12px, 3vw, 14px);
             background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
             color: white;
             border: none;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: clamp(14px, 3.5vw, 16px);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -236,13 +253,70 @@
             transform: translateY(0);
         }
 
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: clamp(20px, 4vw, 25px) 0;
+            gap: 15px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .divider span {
+            color: var(--text-secondary);
+            font-size: clamp(12px, 3vw, 13px);
+            font-weight: 500;
+        }
+
+        .btn-google {
+            width: 100%;
+            padding: clamp(12px, 3vw, 14px);
+            background: var(--google-bg);
+            color: var(--google-text);
+            border: 2px solid var(--google-border);
+            border-radius: 12px;
+            font-size: clamp(14px, 3.5vw, 15px);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .btn-google:hover {
+            background: var(--google-hover);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .btn-google:active {
+            transform: translateY(0);
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
         .error-message {
             background: #fee;
             color: var(--error-color);
             padding: 12px;
             border-radius: 8px;
             margin-top: 15px;
-            font-size: 14px;
+            font-size: clamp(13px, 3vw, 14px);
             border-left: 4px solid var(--error-color);
             animation: shake 0.5s ease;
         }
@@ -254,15 +328,15 @@
         }
 
         .credentials-info {
-            margin-top: 25px;
-            padding: 15px;
+            margin-top: clamp(20px, 4vw, 25px);
+            padding: clamp(12px, 3vw, 15px);
             background: var(--bg-secondary);
             border-radius: 12px;
             border-left: 4px solid var(--accent-color);
         }
 
         .credentials-info .title {
-            font-size: 12px;
+            font-size: clamp(11px, 2.5vw, 12px);
             color: var(--text-secondary);
             font-weight: 600;
             text-transform: uppercase;
@@ -272,17 +346,17 @@
         .credentials-info span {
             display: block;
             color: var(--text-primary);
-            font-size: 14px;
+            font-size: clamp(13px, 3vw, 14px);
             margin-bottom: 5px;
             font-family: 'Courier New', monospace;
         }
 
         .theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
+            top: clamp(15px, 3vw, 20px);
+            right: clamp(15px, 3vw, 20px);
+            width: clamp(45px, 10vw, 50px);
+            height: clamp(45px, 10vw, 50px);
             background: var(--bg-card);
             border: 2px solid var(--border-color);
             border-radius: 50%;
@@ -301,8 +375,8 @@
         }
 
         .theme-toggle svg {
-            width: 24px;
-            height: 24px;
+            width: clamp(20px, 5vw, 24px);
+            height: clamp(20px, 5vw, 24px);
             fill: var(--text-primary);
             transition: all 0.3s ease;
         }
@@ -323,25 +397,74 @@
             display: none;
         }
 
-        @media (max-width: 480px) {
+        /* Responsive breakpoints */
+        @media (max-width: 600px) {
+            body {
+                padding: 8px;
+            }
+
             .login-container {
-                padding: 30px 20px;
+                border-radius: 16px;
+                width: calc(100% - 16px);
+                padding: 20px 16px;
+                max-width: 100%;
             }
 
-            h2 {
-                font-size: 24px;
+            .input-group input {
+                font-size: 16px; /* Prevent zoom on iOS */
             }
-
+            
             .logo-icon {
-                width: 60px;
-                height: 60px;
-            }
-
-            .logo-icon svg {
-                width: 30px;
-                height: 30px;
+                width: 70px;
+                height: 70px;
             }
         }
+
+        @media (max-width: 380px) {
+            body {
+                padding: 5px;
+            }
+            
+            .login-container {
+                margin-bottom: 10px;
+                width: calc(100% - 10px);
+                padding: 18px 14px;
+            }
+
+            .logo-container {
+                margin-bottom: 15px;
+            }
+
+            .btn-google {
+                font-size: 13px;
+                gap: 8px;
+                padding: 10px;
+            }
+
+            .google-icon {
+                width: 18px;
+                height: 18px;
+            }
+
+            .credentials-info {
+                padding: 10px;
+            }
+            
+            .input-group {
+                margin-bottom: 15px;
+            }
+            
+            .divider {
+                margin: 15px 0;
+            }
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+            }
+        }
+
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -409,6 +532,7 @@
             opacity: 1;
             width: auto;
         }
+
     </style>
 </head>
 <body>
@@ -424,7 +548,9 @@
     <div class="login-container">
         <div class="logo-container">
             <div class="logo-icon">
-                <img src="./imagenes/logo.png" alt="Logo del supermercado" style="width: 100%; height: 100%; object-fit: contain; border-radius: 50%;">
+                <svg viewBox="0 0 24 24">
+                    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
             </div>
             <h2>Bienvenido</h2>
             <p class="subtitle">Ingresa a tu cuenta para continuar</p>
@@ -448,7 +574,7 @@
                         <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
                     </svg>
                     <input type="password" id="password" name="password" required placeholder="Ingresa tu contraseña">
-                    <button type="button" class="password-toggle" id="togglePassword">
+                    <button type="button" class="password-toggle" id="togglePassword" aria-label="Mostrar contraseña">
                         <svg viewBox="0 0 24 24" id="eyeIcon">
                             <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
                         </svg>
@@ -458,6 +584,20 @@
 
             <button type="submit" class="btn-login">Iniciar Sesión</button>
         </form>
+
+        <div class="divider">
+            <span>o continúa con</span>
+        </div>
+
+        <button type="button" class="btn-google" id="googleLogin">
+            <svg class="google-icon" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            <span>Continuar con Google</span>
+        </button>
 
         <div id="error-message" class="error-message" style="display: none;"></div>
 

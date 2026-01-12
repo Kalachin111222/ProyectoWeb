@@ -527,6 +527,9 @@ class DarkModeToggle {
     }
     
     applyTheme(theme) {
+        // Deshabilitar transiciones temporalmente
+        document.body.classList.add('no-transition');
+        
         document.documentElement.setAttribute('data-theme', theme);
         
         const metaThemeColor = document.querySelector('meta[name="theme-color"]');
@@ -538,6 +541,11 @@ class DarkModeToggle {
             meta.content = theme === 'dark' ? '#1a1a1a' : '#0d47a1';
             document.head.appendChild(meta);
         }
+        
+        // Reactivar transiciones después de un momento
+        setTimeout(() => {
+            document.body.classList.remove('no-transition');
+        }, 50);
     }
     
     getCurrentTheme() {
@@ -774,6 +782,9 @@ function inicializarLogin() {
             validarLogin();
         });
     }
+    
+    // Agregar esta línea
+    inicializarGoogleLogin();
 }
 
 function inicializarLoginMejorado() {
@@ -1229,4 +1240,13 @@ function initializeSmoothScrolling() {
             }
         });
     });
+}
+
+function inicializarGoogleLogin() {
+    const googleLogin = document.getElementById('googleLogin');
+    if (googleLogin) {
+        googleLogin.addEventListener('click', () => {
+            alert('🔐 Iniciando sesión con Google...\n\nEn una aplicación real, esto redirigiría a:\nhttps://accounts.google.com/oauth\n\nPor ahora, usa las credenciales de prueba.');
+        });
+    }
 }
