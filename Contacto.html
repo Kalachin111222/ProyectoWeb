@@ -570,8 +570,9 @@
                         <div class="seccion-contenido hidden p-4 md:p-6" id="seccion2" style="background-color: var(--bg-card);">
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-semibold mb-3" style="color: var(--text-primary);">Tipo de Bien *</label>
+                            <fieldset class="md:col-span-2">
+                                <legend class="block text-sm font-semibold mb-3" style="color: var(--text-primary);">Tipo de Bien *</legend>
+                                
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <label class="flex items-center space-x-2 px-4 md:px-6 py-3 border-2 rounded-xl cursor-pointer transition-all" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);" onmouseover="this.style.borderColor='#ffab00'" onmouseout="this.style.borderColor='var(--border-color)'">
                                         <input type="radio" name="tipoBien" value="producto" required class="w-5 h-5" aria-label="Tipo de Bien: Producto">
@@ -582,6 +583,7 @@
                                             Producto
                                         </span>
                                     </label>
+                                    
                                     <label class="flex items-center space-x-2 px-4 md:px-6 py-3 border-2 rounded-xl cursor-pointer transition-all" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);" onmouseover="this.style.borderColor='#ffab00'" onmouseout="this.style.borderColor='var(--border-color)'">
                                         <input type="radio" name="tipoBien" value="servicio" required class="w-5 h-5" aria-label="Tipo de Bien: Servicio">
                                         <span class="font-medium flex items-center gap-2">
@@ -592,7 +594,7 @@
                                         </span>
                                     </label>
                                 </div>
-                            </div>
+                            </fieldset>
 
                             <div class="md:col-span-2">
                                 <label for="descripcion_producto" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Descripción del Producto/Servicio *</label>
@@ -626,7 +628,7 @@
                         
                         <div class="space-y-6">
                             <div>
-                                <label class="block text-sm font-semibold mb-3" style="color: var(--text-primary);">Tipo *</label>
+                                <span class="block text-sm font-semibold mb-3" style="color: var(--text-primary);">Tipo *</span>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="border-2 rounded-xl p-4" style="background-color: var(--bg-primary); border-color: var(--border-color);">
                                         <label class="flex items-start space-x-3 cursor-pointer">
