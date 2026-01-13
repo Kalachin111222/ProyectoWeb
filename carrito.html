@@ -33,6 +33,8 @@
             --carrito-item-bg: #ffffff;
             --carrito-item-border: #e5e7eb;
             --input-border: #d1d5db;
+            --btn-vaciar-bg: #dc2626; 
+            --btn-vaciar-hover: #b91c1c;
         }
 
         [data-theme="dark"] {
@@ -61,6 +63,8 @@
             --carrito-item-bg: #2d2d2d;
             --carrito-item-border: #404040;
             --input-border: #4b5563;
+            --btn-continuar-bg: #2563eb;
+            --btn-continuar-hover: #1d4ed8;
         }
 
         * {
@@ -811,11 +815,15 @@
             <h3 id="total-final">Total: S/ 0.00</h3>
         </div>
         <div class="carrito-acciones">
-            <button onclick="vaciarCarrito()" class="px-4 py-2 font-bold text-red-700 transition-colors bg-white border border-red-700 rounded hover:bg-red-50 hover:text-red-800">
+            <button 
+                onclick="vaciarCarrito()" 
+                class="px-4 py-2 font-bold text-white transition-colors rounded shadow-md bg-[var(--btn-vaciar-bg)] hover:bg-[var(--btn-vaciar-hover)]">
                 Vaciar Carrito
             </button>
 
-            <button onclick="window.location.href='index.html'" class="px-4 py-2 font-bold text-white transition-colors bg-gray-800 rounded hover:bg-black hover:scale-105">
+            <button 
+                onclick="window.location.href='index.html'" 
+                class="px-4 py-2 font-bold text-white transition-colors rounded shadow-md bg-[var(--btn-continuar-bg)] hover:bg-[var(--btn-continuar-hover)]">
                 Continuar Comprando
             </button>
         </div>
