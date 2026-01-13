@@ -344,13 +344,14 @@
     </style>
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col pt-16" style="background-color: var(--bg-primary); color: var(--text-primary);">
+    <h1 class="sr-only">Supermercado - Venta de licores y productos</h1>
     <header class="header-fixed fixed top-0 left-0 right-0 z-50 w-full p-2 flex justify-between items-center shadow-lg 
                 md:grid md:grid-cols-3 md:gap-4">
         
         <div class="flex items-center md:justify-self-start">
-            <button id="hamburgerBtn" class="md:hidden text-white text-2xl z-60 icon-button p-2">
+            <button id="hamburgerBtn" aria-label="Menú principal" class="md:hidden text-white text-2xl z-60 icon-button p-2">
                 <svg id="hamburgerIcon" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
             
@@ -363,7 +364,7 @@
         
         <div class="hidden md:flex items-center justify-center w-full">
             <div class="relative w-full md:max-w-md lg:max-w-3xl xl:max-w-4xl">
-                <input type="text" placeholder="Buscar productos..." class="caja-busqueda p-3 pl-12 pr-4 text-base w-full rounded-lg border border-gray-600 h-11" style="background-color: var(--busqueda); color: var(--text-primary);">
+                <input type="search" aria-label="Buscar productos" placeholder=" Buscar productos..." class="caja-busqueda p-3 pl-12 pr-4 text-base w-full rounded-lg border border-gray-600 h-11" style="background-color: var(--busqueda); color: var(--text-primary);"> 
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
@@ -373,8 +374,14 @@
         <div class="flex items-center justify-end md:justify-self-end">
             
             <div class="flex-shrink-0 md:hidden"> 
-                <a href="index.html" class="icon-button inline-block">
-                    <img src="./imagenes/logo.png" alt="Logo del supermercado" class="h-12 w-auto">
+                <a href="index.html" class="flex items-center gap-2 icon-button" aria-label="Ir a Inicio (Móvil)">
+                    
+                    <img src="./imagenes/logo.png" alt="" class="h-12 w-auto">
+                    
+                    <span class="font-bold text-gray-800">
+                        Inicio
+                    </span>
+                    
                 </a>
             </div>
 
@@ -391,7 +398,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span>
+                        <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span>
                     </div>
                     <span>Carrito (S/ 0.00)</span>
                 </a>
@@ -408,7 +415,7 @@
             
             <div class="mb-6 md:hidden">
                 <div class="relative">
-                    <input type="text" placeholder="Buscar productos..." class="w-full p-3 pl-12 rounded-lg border" style="background-color: var(--bg-primary); color: var(--text-primary); border-color: var(--border-color);">
+                    <input type="search" aria-label="Buscar productos" placeholder="Buscar productos..." class="w-full p-3 pl-12 rounded-lg border" style="background-color: var(--bg-primary); color: var(--text-primary); border-color: var(--border-color);">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
