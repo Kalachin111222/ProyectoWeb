@@ -470,7 +470,6 @@
     <!-- Contenido Principal -->
     <main class="py-8 px-4">
         <div class="max-w-4xl mx-auto">
-            <!-- Header del formulario -->
             <div class="rounded-t-3xl p-6 md:p-8 text-white shadow-xl mb-0" style="background-color: var(--color-header);">
                 <div class="flex items-center justify-between">
                     <div>
@@ -488,11 +487,9 @@
                 </div>
             </div>
 
-            <!-- Formulario -->
             <div class="rounded-b-3xl shadow-2xl p-4 md:p-8" style="background-color: var(--bg-card);">
                 <form id="reclamacionForm" class="space-y-4">
                     
-                    <!-- Sección 1: Datos del Consumidor -->
                     <div class="border-2 rounded-xl overflow-hidden" style="border-color: var(--border-color);">
                         <button type="button" class="seccion-toggle w-full p-4 md:p-6 flex items-center justify-between transition-all hover:opacity-80" style="background-color: var(--color-header); color: white;" data-seccion="seccion1">
                             <div class="flex items-center gap-3">
@@ -507,18 +504,18 @@
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Nombre Completo *</label>
-                                <input type="text" required placeholder="Ingrese su nombre completo" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
+                                <label for="nombre" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Nombre Completo *</label>
+                                <input id="nombre" type="text" required placeholder="Ingrese su nombre completo" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
                             </div>
                             
                             <div>
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Apellidos *</label>
-                                <input type="text" required placeholder="Ingrese sus apellidos" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
+                                <label for="apellidos" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Apellidos *</label>
+                                <input id="apellidos" type="text" required placeholder="Ingrese sus apellidos" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Tipo de Documento *</label>
-                                <select required class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
+                                <label for="tipo_documento" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Tipo de Documento *</label>
+                                <select id="tipo_documento" required class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
                                     <option value="">Seleccione</option>
                                     <option value="dni">DNI</option>
                                     <option value="ce">Carnet de Extranjería</option>
@@ -528,43 +525,42 @@
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Número de Documento *</label>
-                                <input type="text" required placeholder="Ingrese su número" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
+                                <label for="num_documento" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Número de Documento *</label>
+                                <input id="num_documento" type="text" required placeholder="Ingrese su número" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
                             </div>
 
                             <div class="md:col-span-2">
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Dirección *</label>
-                                <input type="text" required placeholder="Ingrese su dirección completa" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
+                                <label for="direccion" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Dirección *</label>
+                                <input id="direccion" type="text" required placeholder="Ingrese su dirección completa" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Correo Electrónico *</label>
-                                <input type="email" required placeholder="ejemplo@correo.com" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
+                                <label for="correo" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Correo Electrónico *</label>
+                                <input id="correo" type="email" required placeholder="ejemplo@correo.com" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Teléfono / Celular *</label>
-                                <input type="tel" required placeholder="999 999 999" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
+                                <label for="telefono" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Teléfono / Celular *</label>
+                                <input id="telefono" type="tel" required placeholder="999 999 999" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Departamento *</label>
-                                <input type="text" required placeholder="Ej: Lima" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
+                                <label for="departamento" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Departamento *</label>
+                                <input id="departamento" type="text" required placeholder="Ej: Lima" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Provincia *</label>
-                                <input type="text" required placeholder="Ej: Lima" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
+                                <label for="provincia" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Provincia *</label>
+                                <input id="provincia" type="text" required placeholder="Ej: Lima" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
                             </div>
                         </div>
                         </div>
                     </div>
 
-                    <!-- Sección 2: Tipo de Reclamación -->
                     <div class="border-2 rounded-xl overflow-hidden" style="border-color: var(--border-color);">
-                        <button type="button" class="seccion-toggle w-full p-4 md:p-6 flex items-center justify-between transition-all hover:opacity-80" style="background-color: #ffab00; color: var(--text1);" data-seccion="seccion2">
+                        <button type="button" class="seccion-toggle w-full p-4 md:p-6 flex items-center justify-between transition-all hover:opacity-80" style="background-color: #b45309; color: white;" data-seccion="seccion2">
                             <div class="flex items-center gap-3">
-                                <span class="bg-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold" style="color: #ffab00;">2</span>
+                                <span class="bg-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold" style="color: #b45309;">2</span>
                                 <h2 class="text-lg md:text-xl font-bold">Identificación del Bien Contratado</h2>
                             </div>
                             <svg class="icono-toggle h-6 w-6 transition-transform transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -578,7 +574,7 @@
                                 <label class="block text-sm font-semibold mb-3" style="color: var(--text-primary);">Tipo de Bien *</label>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <label class="flex items-center space-x-2 px-4 md:px-6 py-3 border-2 rounded-xl cursor-pointer transition-all" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);" onmouseover="this.style.borderColor='#ffab00'" onmouseout="this.style.borderColor='var(--border-color)'">
-                                        <input type="radio" name="tipoBien" value="producto" required class="w-5 h-5">
+                                        <input type="radio" name="tipoBien" value="producto" required class="w-5 h-5" aria-label="Tipo de Bien: Producto">
                                         <span class="font-medium flex items-center gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="stroke: var(--text-primary);">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
@@ -587,7 +583,7 @@
                                         </span>
                                     </label>
                                     <label class="flex items-center space-x-2 px-4 md:px-6 py-3 border-2 rounded-xl cursor-pointer transition-all" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);" onmouseover="this.style.borderColor='#ffab00'" onmouseout="this.style.borderColor='var(--border-color)'">
-                                        <input type="radio" name="tipoBien" value="servicio" required class="w-5 h-5">
+                                        <input type="radio" name="tipoBien" value="servicio" required class="w-5 h-5" aria-label="Tipo de Bien: Servicio">
                                         <span class="font-medium flex items-center gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="stroke: var(--text-primary);">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
@@ -599,28 +595,27 @@
                             </div>
 
                             <div class="md:col-span-2">
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Descripción del Producto/Servicio *</label>
-                                <textarea required rows="3" placeholder="Describa el producto o servicio adquirido" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none resize-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);"></textarea>
+                                <label for="descripcion_producto" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Descripción del Producto/Servicio *</label>
+                                <textarea id="descripcion_producto" required rows="3" placeholder="Describa el producto o servicio adquirido" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none resize-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);"></textarea>
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Monto Reclamado (S/) *</label>
-                                <input type="number" step="0.01" required placeholder="0.00" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
+                                <label for="monto" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Monto Reclamado (S/) *</label>
+                                <input id="monto" type="number" step="0.01" required placeholder="0.00" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Fecha de Compra *</label>
-                                <input type="date" required class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
+                                <label for="fecha_compra" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Fecha de Compra *</label>
+                                <input id="fecha_compra" type="date" required class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
                             </div>
                         </div>
                         </div>
                     </div>
 
-                    <!-- Sección 3: Detalle del Reclamo -->
                     <div class="border-2 rounded-xl overflow-hidden" style="border-color: var(--border-color);">
-                        <button type="button" class="seccion-toggle w-full p-4 md:p-6 flex items-center justify-between transition-all hover:opacity-80" style="background-color: #f44336; color: white;" data-seccion="seccion3">
+                        <button type="button" class="seccion-toggle w-full p-4 md:p-6 flex items-center justify-between transition-all hover:opacity-80" style="background-color: #c62828; color: white;" data-seccion="seccion3">
                             <div class="flex items-center gap-3">
-                                <span class="bg-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold" style="color: #f44336;">3</span>
+                                <span class="bg-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold" style="color: #c62828;">3</span>
                                 <h2 class="text-lg md:text-xl font-bold">Detalle de la Reclamación o Queja</h2>
                             </div>
                             <svg class="icono-toggle h-6 w-6 transition-transform transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -635,7 +630,7 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="border-2 rounded-xl p-4" style="background-color: var(--bg-primary); border-color: var(--border-color);">
                                         <label class="flex items-start space-x-3 cursor-pointer">
-                                            <input type="radio" name="tipoReclamo" value="reclamo" required class="w-5 h-5 mt-1 flex-shrink-0">
+                                            <input type="radio" name="tipoReclamo" value="reclamo" required class="w-5 h-5 mt-1 flex-shrink-0" aria-label="Tipo: Reclamo">
                                             <div>
                                                 <span class="font-bold block flex items-center gap-2 text-sm md:text-base" style="color: #c62828;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -649,9 +644,9 @@
                                     </div>
                                     <div class="border-2 rounded-xl p-4" style="background-color: var(--bg-primary); border-color: var(--border-color);">
                                         <label class="flex items-start space-x-3 cursor-pointer">
-                                            <input type="radio" name="tipoReclamo" value="queja" required class="w-5 h-5 mt-1 flex-shrink-0">
+                                            <input type="radio" name="tipoReclamo" value="queja" required class="w-5 h-5 mt-1 flex-shrink-0" aria-label="Tipo: Queja">
                                             <div>
-                                                <span class="font-bold block flex items-center gap-2 text-sm md:text-base" style="color: #ff9800;">
+                                                <span class="font-bold block flex items-center gap-2 text-sm md:text-base" style="color: #e65100;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                                                     </svg>
@@ -665,23 +660,22 @@
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Detalle del Reclamo/Queja *</label>
-                                <textarea required rows="5" placeholder="Describa detalladamente su reclamo o queja..." class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none resize-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);"></textarea>
+                                <label for="detalle_reclamo" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Detalle del Reclamo/Queja *</label>
+                                <textarea id="detalle_reclamo" required rows="5" placeholder="Describa detalladamente su reclamo o queja..." class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none resize-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);"></textarea>
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Pedido del Consumidor *</label>
-                                <textarea required rows="4" placeholder="Indique qué acción espera que tome el proveedor para resolver su reclamo..." class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none resize-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);"></textarea>
+                                <label for="pedido_consumidor" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Pedido del Consumidor *</label>
+                                <textarea id="pedido_consumidor" required rows="4" placeholder="Indique qué acción espera que tome el proveedor para resolver su reclamo..." class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none resize-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);"></textarea>
                             </div>
                         </div>
                         </div>
                     </div>
 
-                    <!-- Sección 4: Observaciones -->
                     <div class="border-2 rounded-xl overflow-hidden" style="border-color: var(--border-color);">
-                        <button type="button" class="seccion-toggle w-full p-4 md:p-6 flex items-center justify-between transition-all hover:opacity-80" style="background-color: #4CAF50; color: white;" data-seccion="seccion4">
+                        <button type="button" class="seccion-toggle w-full p-4 md:p-6 flex items-center justify-between transition-all hover:opacity-80" style="background-color: #15803d; color: white;" data-seccion="seccion4">
                             <div class="flex items-center gap-3">
-                                <span class="bg-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold" style="color: #4CAF50;">4</span>
+                                <span class="bg-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold" style="color: #15803d;">4</span>
                                 <h2 class="text-lg md:text-xl font-bold">Observaciones y Acciones Adoptadas</h2>
                             </div>
                             <svg class="icono-toggle h-6 w-6 transition-transform transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -691,24 +685,22 @@
                         <div class="seccion-contenido hidden p-4 md:p-6" id="seccion4" style="background-color: var(--bg-card);">
                         
                         <div class="border-2 rounded-xl p-4 md:p-6" style="background-color: var(--bg-primary); border-color: var(--border-color);">
-                            <textarea rows="4" placeholder="Este espacio será llenado por el proveedor (opcional para el consumidor)" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none resize-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);"></textarea>
+                            <textarea aria-label="Observaciones y acciones adoptadas por el proveedor" rows="4" placeholder="Este espacio será llenado por el proveedor (opcional para el consumidor)" class="w-full px-4 py-3 border-2 rounded-xl transition-all outline-none resize-none" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);"></textarea>
                         </div>
                         </div>
                     </div>
 
-                    <!-- Términos y Condiciones -->
                     <div class="border-2 rounded-xl p-4 md:p-6" style="background-color: var(--bg-primary); border-color: var(--border-color);">
                         <label class="flex items-start space-x-3 cursor-pointer">
-                            <input type="checkbox" required class="w-5 h-5 mt-1 rounded flex-shrink-0">
+                            <input type="checkbox" required class="w-5 h-5 mt-1 rounded flex-shrink-0" aria-label="Acepto los términos y declaro bajo juramento">
                             <span class="text-xs md:text-sm" style="color: var(--text-primary);">
                                 <span class="font-bold">Declaro bajo juramento</span> que la información proporcionada es verdadera y autorizo el uso de mis datos personales para el trámite de mi reclamo, de acuerdo con la Ley de Protección de Datos Personales. *
                             </span>
                         </label>
                     </div>
 
-                    <!-- Botones -->
                     <div class="flex flex-col sm:flex-row gap-4 pt-4 md:pt-6">
-                        <button type="submit" class="flex-1 text-white font-bold py-3 md:py-4 px-4 md:px-6 rounded-xl transform hover:scale-105 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2" style="background-color: #4CAF50;">
+                        <button type="submit" class="flex-1 text-white font-bold py-3 md:py-4 px-4 md:px-6 rounded-xl transform hover:scale-105 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2" style="background-color: #15803d;">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -722,7 +714,6 @@
                         </button>
                     </div>
 
-                    <!-- Información Legal -->
                     <div class="rounded-xl p-4 md:p-6 text-xs md:text-sm" style="background-color: var(--bg-secondary); color: var(--text-secondary);">
                         <p class="font-semibold mb-2 flex items-center gap-2" style="color: var(--text-primary);">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
