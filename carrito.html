@@ -681,13 +681,14 @@
     </style>
 </head>
 <body>
+    <h1 class="sr-only">Supermercado - Venta de licores y productos</h1>
     <header class="header-fixed fixed top-0 left-0 right-0 z-50 w-full p-2 flex justify-between items-center shadow-lg 
                 md:grid md:grid-cols-3 md:gap-4">
         
         <div class="flex items-center md:justify-self-start">
-            <button id="hamburgerBtn" class="md:hidden text-white text-2xl z-60 icon-button p-2">
+            <button id="hamburgerBtn" aria-label="Menú principal" class="md:hidden text-white text-2xl z-60 icon-button p-2">
                 <svg id="hamburgerIcon" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
             
@@ -700,7 +701,7 @@
         
         <div class="hidden md:flex items-center justify-center w-full">
             <div class="relative w-full md:max-w-md lg:max-w-3xl xl:max-w-4xl">
-                <input type="text" placeholder="Buscar productos..." class="caja-busqueda p-3 pl-12 pr-4 text-base w-full rounded-lg border h-11">
+                <input type="search" aria-label="Buscar productos" placeholder=" Buscar productos..." class="caja-busqueda p-3 pl-12 pr-4 text-base w-full rounded-lg border border-gray-600 h-11" style="background-color: var(--busqueda); color: var(--text-primary);"> 
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
@@ -708,9 +709,16 @@
         </div>
         
         <div class="flex items-center justify-end md:justify-self-end">
+            
             <div class="flex-shrink-0 md:hidden"> 
-                <a href="index.html" class="icon-button inline-block">
-                    <img src="./imagenes/logo.png" alt="Logo del supermercado" class="h-12 w-auto">
+                <a href="/" class="flex items-center gap-2 icon-button" aria-label="Ir a Inicio (Móvil)">
+                    
+                    <img src="./imagenes/logo.png" alt="" class="h-12 w-auto">
+                    
+                    <span class="font-bold text-gray-800">
+                        Inicio
+                    </span>
+
                 </a>
             </div>
 
@@ -727,17 +735,15 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        <span id="carrito-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span>
+                        <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span>
                     </div>
-                    <span id="carrito-total">Carrito (S/ 0.00)</span>
+                    <span>Carrito (S/ 0.00)</span>
                 </a>
             </div>
         </div>
     </header>
 
-    <div id="menuOverlay" class="fixed inset-0 bg-black opacity-0 invisible transition-all duration-300 z-40"></div>
-
-    <div id="hamburgerMenu" class="fixed top-0 left-0 h-full w-80 shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto">
+    <div id="hamburgerMenu" class="fixed top-0 left-0 h-full w-80 bg-white dark:bg-gray-800 shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto" style="background-color: var(--border-color);">
         <div class="p-6">
             <div class="flex justify-between items-center mb-8 border-b pb-4" style="border-color: var(--border-color);">
                 <h2 class="text-xl font-bold" style="color: var(--text-primary);">Menú</h2>
@@ -746,7 +752,7 @@
             
             <div class="mb-6 md:hidden">
                 <div class="relative">
-                    <input type="text" placeholder="Buscar productos..." class="caja-busqueda w-full p-3 pl-12 rounded-lg border">
+                    <input type="search" aria-label="Buscar productos" placeholder="Buscar productos..." class="w-full p-3 pl-12 rounded-lg border" style="background-color: var(--bg-primary); color: var(--text-primary); border-color: var(--border-color);">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
@@ -755,12 +761,12 @@
             
             <div class="space-y-4 mb-8">
                 <div id="usuario-info-mobile">
-                    <a href="cuenta.html" class="flex items-center p-3 rounded-lg hover:opacity-80 transition-all" style="color: var(--text-primary); background-color: var(--bg-secondary);">
+                    <a href="cuenta.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
                         <span class="font-semibold">Mi Cuenta</span>
                     </a>
                 </div>
                 <div class="cuenta-carrito">
-                    <a id="carrito-total-mobile" href="carrito.html" class="flex items-center p-3 rounded-lg hover:opacity-80 transition-all" style="color: var(--text-primary); background-color: var(--bg-secondary);">
+                    <a href="carrito.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
                         <span class="font-semibold">Carrito (S/ 0.00)</span>
                     </a>
                 </div>
@@ -769,28 +775,28 @@
             <div class="border-t pt-6" style="border-color: var(--border-color);">
                 <h3 class="text-lg font-bold mb-4" style="color: var(--text-primary);">Categorías</h3>
                 <div class="space-y-3">
-                    <a href="index.html" class="flex items-center p-3 rounded-lg hover:opacity-80 transition-all" style="color: var(--text-primary); background-color: var(--bg-secondary);">
+                    <a href="index.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
                         <span>Inicio</span>
                     </a>
-                    <a href="Cervezas.html" class="flex items-center p-3 rounded-lg hover:opacity-80 transition-all" style="color: var(--text-primary); background-color: var(--bg-secondary);">
+                    <a href="Cervezas.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
                         <span>Cervezas</span>
                     </a>
-                    <a href="Licores.html" class="flex items-center p-3 rounded-lg hover:opacity-80 transition-all" style="color: var(--text-primary); background-color: var(--bg-secondary);">
+                    <a href="Licores.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
                         <span>Licores</span>
                     </a>
-                    <a href="Comidas.html" class="flex items-center p-3 rounded-lg hover:opacity-80 transition-all" style="color: var(--text-primary); background-color: var(--bg-secondary);">
+                    <a href="Comidas.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
                         <span>Comidas</span>
                     </a>
-                    <a href="Bebidas.html" class="flex items-center p-3 rounded-lg hover:opacity-80 transition-all" style="color: var(--text-primary); background-color: var(--bg-secondary);">
+                    <a href="Bebidas.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
                         <span>Bebidas</span>
                     </a>
-                    <a href="Antojos.html" class="flex items-center p-3 rounded-lg hover:opacity-80 transition-all" style="color: var(--text-primary); background-color: var(--bg-secondary);">
+                    <a href="Antojos.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
                         <span>Antojos</span>
                     </a>
-                    <a href="Helados.html" class="flex items-center p-3 rounded-lg hover:opacity-80 transition-all" style="color: var(--text-primary); background-color: var(--bg-secondary);">
+                    <a href="Helados.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
                         <span>Helados</span>
                     </a>
-                    <a href="Despensa.html" class="flex items-center p-3 rounded-lg hover:opacity-80 transition-all" style="color: var(--text-primary); background-color: var(--bg-secondary);">
+                    <a href="Despensa.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
                         <span>Despensa</span>
                     </a>
                 </div>
