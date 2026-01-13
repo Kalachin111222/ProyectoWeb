@@ -21,7 +21,7 @@
             --busqueda: #ffffff;
             --btnAgregar: #ffab00;
             --text1: #ffffff;
-            --btn-vaciar-bg: #dc2626; 
+            ---btn-vaciar-bg: #dc2626; 
             --btn-vaciar-hover: #b91c1c;
             --btn-continuar-bg: #2563eb;
             --btn-continuar-hover: #1d4ed8;
@@ -810,18 +810,22 @@
         <div class="carrito-total">
             <h3 id="total-final">Total: S/ 0.00</h3>
         </div>
-        <div class="carrito-acciones">
+        <div class="flex flex-wrap items-center justify-between gap-4 carrito-acciones">
+    
             <button 
                 onclick="vaciarCarrito()" 
-                class="px-4 py-2 font-bold text-white transition-colors rounded shadow-md bg-[var(--btn-vaciar-bg)] hover:bg-[var(--btn-vaciar-hover)]">
+                class="px-4 py-2 font-bold text-white transition-colors rounded shadow-md hover:brightness-90"
+                style="background-color: var(--btn-vaciar-bg);">
                 Vaciar Carrito
             </button>
 
             <button 
                 onclick="window.location.href='index.html'" 
-                class="px-4 py-2 font-bold text-white transition-colors rounded shadow-md bg-[var(--btn-continuar-bg)] hover:bg-[var(--btn-continuar-hover)]">
+                class="px-4 py-2 font-bold text-white transition-colors rounded shadow-md hover:brightness-90"
+                style="background-color: var(--btn-continuar-bg);">
                 Continuar Comprando
             </button>
+
         </div>
     </main>
 
