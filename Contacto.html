@@ -341,6 +341,11 @@
         .icono-toggle {
             transition: transform 0.3s ease;
         }
+
+        .opcion-interactiva:hover,
+        .opcion-interactiva:focus-within {
+            border-color: #ffab00 !important;
+        }
     </style>
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col pt-16" style="background-color: var(--bg-primary); color: var(--text-primary);">
@@ -574,7 +579,7 @@
                                 <legend class="block text-sm font-semibold mb-3" style="color: var(--text-primary);">Tipo de Bien *</legend>
                                 
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <label class="flex items-center space-x-2 px-4 md:px-6 py-3 border-2 rounded-xl cursor-pointer transition-all" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);" onmouseover="this.style.borderColor='#ffab00'" onmouseout="this.style.borderColor='var(--border-color)'">
+                                    <label class="opcion-interactiva flex items-center space-x-2 px-4 md:px-6 py-3 border-2 rounded-xl cursor-pointer transition-all" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
                                         <input type="radio" name="tipoBien" value="producto" required class="w-5 h-5" aria-label="Tipo de Bien: Producto">
                                         <span class="font-medium flex items-center gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="stroke: var(--text-primary);">
@@ -584,7 +589,7 @@
                                         </span>
                                     </label>
                                     
-                                    <label class="flex items-center space-x-2 px-4 md:px-6 py-3 border-2 rounded-xl cursor-pointer transition-all" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);" onmouseover="this.style.borderColor='#ffab00'" onmouseout="this.style.borderColor='var(--border-color)'">
+                                    <label class="opcion-interactiva flex items-center space-x-2 px-4 md:px-6 py-3 border-2 rounded-xl cursor-pointer transition-all" style="border-color: var(--border-color); background-color: var(--bg-primary); color: var(--text-primary);">
                                         <input type="radio" name="tipoBien" value="servicio" required class="w-5 h-5" aria-label="Tipo de Bien: Servicio">
                                         <span class="font-medium flex items-center gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="stroke: var(--text-primary);">
