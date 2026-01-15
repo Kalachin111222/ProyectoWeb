@@ -22,13 +22,12 @@
             --bg-primary: #ffffff;
             --bg-secondary: #f8f9fa;
             --bg-card: #ffffff;
-            --text-primary: #000000;    
+            --text-primary: #000000;
             --text-secondary: #666666;
             --border-color: #eeeeee;
             --shadow: rgba(0, 0, 0, 0.1);
             --accent-color: #0d47a1;
-            --accent-hover: #0b4e92;
-            
+            --accent-hover: #0d47a1;
         }
 
         [data-theme="dark"] {
@@ -39,9 +38,8 @@
             --text-secondary: #cccccc;
             --border-color: #444444;
             --shadow: rgba(0, 0, 0, 0.5);
-            --accent-color: #1a2332;
-            --accent-hover: #131e30;
-            
+            --accent-color: #101d31;
+            --accent-hover: #101d31;
         }
 
         body {
@@ -288,10 +286,186 @@
             background: rgba(220, 38, 38, 0.2);
             color: #fca5a5;
         }
+
+        /* Modal Google Login */
+        .google-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .google-modal.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .google-modal-content {
+            background: white;
+            border-radius: 8px;
+            max-width: 450px;
+            width: 100%;
+            animation: slideUp 0.4s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .google-header {
+            padding: 24px 24px 0;
+            text-align: center;
+        }
+
+        .google-logo {
+            width: 75px;
+            height: 24px;
+            margin: 0 auto 16px;
+        }
+
+        .google-title {
+            font-size: 24px;
+            font-weight: 400;
+            color: #202124;
+            margin-bottom: 8px;
+        }
+
+        .google-subtitle {
+            font-size: 16px;
+            color: #5f6368;
+            margin-bottom: 24px;
+        }
+
+        .google-accounts {
+            padding: 0;
+        }
+
+        .google-account {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: none;
+            width: 100%;
+            background: white;
+            text-align: left;
+        }
+
+        .google-account:hover {
+            background: #f1f3f4;
+        }
+
+        .google-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .google-account-info {
+            flex: 1;
+        }
+
+        .google-account-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 2px;
+        }
+
+        .google-account-email {
+            font-size: 12px;
+            color: #5f6368;
+        }
+
+        .google-divider {
+            height: 1px;
+            background: #dadce0;
+            margin: 8px 0;
+        }
+
+        .google-add-account {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            background: white;
+            text-align: left;
+            transition: background 0.2s;
+        }
+
+        .google-add-account:hover {
+            background: #f1f3f4;
+        }
+
+        .google-add-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #dadce0;
+        }
+
+        .google-loading {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .google-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4285F4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .google-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .google-close:hover {
+            background: #f1f3f4;
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-5 relative overflow-x-hidden">
-    <h1 class="sr-only">Supermercado - Venta de licores y productos</h1>
     
     <div class="absolute inset-0 bg-pattern pointer-events-none"></div>
 
@@ -304,7 +478,7 @@
         </svg>
     </button>
 
-    <main class="w-full max-w-lg login-card rounded-3xl shadow-2xl p-8 md:p-12 relative z-10 animate-slideUp border">
+    <div class="w-full max-w-lg login-card rounded-3xl shadow-2xl p-8 md:p-12 relative z-10 animate-slideUp border">
         
         <div class="text-center mb-8">
             <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg" style="background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));">
@@ -317,7 +491,6 @@
         </div>
 
         <form id="loginForm" class="space-y-6">
-            
             <div>
                 <label for="usuario" class="block text-sm font-medium label-text mb-2">Usuario</label>
                 <div class="relative">
@@ -350,9 +523,10 @@
                     <button 
                         type="button" 
                         id="togglePassword"
-                        aria-label="Mostrar contraseña"
                         class="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-lg transition-colors" 
-                        style="background: transparent;">
+                        style="background: transparent;"
+                        aria-label="Mostrar/Ocultar contraseña">
+                        
                         <svg id="eyeIcon" class="w-5 h-5 icon-color" viewBox="0 0 24 24">
                             <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
                         </svg>
@@ -396,8 +570,9 @@
                 <div>🔒 Contraseña: 123456</div>
             </div>
         </div>
-    </main>
+    </div>
 
+    <script src="translations.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

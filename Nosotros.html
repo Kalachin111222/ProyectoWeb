@@ -356,7 +356,7 @@
         
         <div class="hidden md:flex items-center justify-center w-full">
             <div class="relative w-full md:max-w-md lg:max-w-3xl xl:max-w-4xl">
-                <input type="search" aria-label="Buscar productos" placeholder=" Buscar productos..." class="caja-busqueda p-3 pl-12 pr-4 text-base w-full rounded-lg border border-gray-600 h-11" style="background-color: var(--busqueda); color: var(--text-primary);"> 
+                <input type="search" aria-label="Buscar productos" data-translate="nav.search" placeholder=" Buscar productos..." class="caja-busqueda p-3 pl-12 pr-4 text-base w-full rounded-lg border border-gray-600 h-11" style="background-color: var(--busqueda); color: var(--text-primary);"> 
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
@@ -366,11 +366,11 @@
         <div class="flex items-center justify-end md:justify-self-end">
             
             <div class="flex-shrink-0 md:hidden"> 
-                <a href="" class="flex items-center gap-2 group icon-button">
-    
-                    <img src="./imagenes/logo.png" alt="" class="w-auto h-12">
+                <a href="" class="flex items-center gap-2 icon-button" aria-label="Ir a Inicio (Móvil)">
                     
-                    <span class="font-bold text-gray-800 transition-colors group-hover:text-blue-600">
+                    <img src="./imagenes/logo.png" alt="" class="h-12 w-auto">
+                    
+                    <span class="font-bold text-gray-800">
                         Inicio
                     </span>
 
@@ -382,7 +382,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
-                    <span>Mi cuenta</span>
+                    <span data-translate="nav.account">Mi cuenta</span>
                 </a>
                 
                 <a href="carrito.html" class="no-underline text-white flex items-center gap-2 icon-button hover:text-yellow-300 transition-colors">
@@ -392,7 +392,7 @@
                         </svg>
                         <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">0</span>
                     </div>
-                    <span>Carrito (S/ 0.00)</span>
+                    <span data-translate="nav.cart">Carrito (S/ 0.00)</span>
                 </a>
             </div>
         </div>
@@ -401,13 +401,13 @@
     <div id="hamburgerMenu" class="fixed top-0 left-0 h-full w-80 bg-white dark:bg-gray-800 shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto" style="background-color: var(--border-color);">
         <div class="p-6">
             <div class="flex justify-between items-center mb-8 border-b pb-4" style="border-color: var(--border-color);">
-                <h2 class="text-xl font-bold" style="color: var(--text-primary);">Menú</h2>
+                <h2 class="text-xl font-bold" style="color: var(--text-primary);" data-translate="nav.menu">Menú</h2>
                 <button id="closeMenuBtn" class="text-2xl" style="color: var(--text-primary);">×</button>
             </div>
             
             <div class="mb-6 md:hidden">
                 <div class="relative">
-                    <input type="search" aria-label="Buscar productos" placeholder="Buscar productos..." class="w-full p-3 pl-12 rounded-lg border" style="background-color: var(--bg-primary); color: var(--text-primary); border-color: var(--border-color);">
+                    <input type="search" aria-label="Buscar productos"  data-translate="nav.search" placeholder="Buscar productos..." class="w-full p-3 pl-12 rounded-lg border" style="background-color: var(--bg-primary); color: var(--text-primary); border-color: var(--border-color);">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
@@ -417,54 +417,70 @@
             <div class="space-y-4 mb-8">
                 <div id="usuario-info-mobile">
                     <a href="cuenta.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
-                        <span class="font-semibold">Mi Cuenta</span>
+                        <span class="font-semibold" data-translate="nav.account">Mi Cuenta</span>
                     </a>
                 </div>
                 <div class="cuenta-carrito">
                     <a href="carrito.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
-                        <span class="font-semibold">Carrito (S/ 0.00)</span>
+                        <span class="font-semibold" data-translate="nav.cart">Carrito (S/ 0.00)</span>
                     </a>
                 </div>
             </div>
             
             <div class="border-t pt-6" style="border-color: var(--border-color);">
-                <h3 class="text-lg font-bold mb-4" style="color: var(--text-primary);">Categorías</h3>
+                <h3 class="text-lg font-bold mb-4" style="color: var(--text-primary);" data-translate="nav.categories">Categorías</h3>
                 <div class="space-y-3">
                     <a href="index.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
-                        <span>Inicio</span>
+                        <span data-translate="nav.home">Inicio</span>
                     </a>
                     <a href="Cervezas.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
-                        <span>Cervezas</span>
+                        <span data-translate="nav.beers">Cervezas</span>
                     </a>
                     <a href="Licores.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
-                        <span>Licores</span>
+                        <span data-translate="nav.liquors">Licores</span>
                     </a>
                     <a href="Comidas.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
-                        <span>Comidas</span>
+                        <span data-translate="nav.food">Comidas</span>
                     </a>
                     <a href="Bebidas.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
-                        <span>Bebidas</span>
+                        <span data-translate="nav.drinks">Bebidas</span>
                     </a>
                     <a href="Antojos.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
-                        <span>Antojos</span>
+                        <span data-translate="nav.snacks">Antojos</span>
                     </a>
                     <a href="Helados.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
-                        <span>Helados</span>
+                        <span data-translate="nav.icecream">Helados</span>
                     </a>
                     <a href="Despensa.html" class="flex items-center p-3 rounded-lg hover:bg-gray-500 dark:hover:bg-gray-700 transition-colors" style="color: var(--text-primary);">
-                        <span>Despensa</span>
+                        <span data-translate="nav.pantry">Despensa</span>
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="contenedor-migas">
-        <nav class="nav-migas">
-            <a href="index.html" class="item-migas">Inicio</a>
-            <span class="separador-migas">></span>
-            <a href="" class="item-migas activo">Nosotros</a>
-        </nav>
+    <div class="w-full py-6 px-5" style="background-color: var(--bg-secondary);">
+        <div class="max-w-screen-xl mx-auto" >
+            <nav class="flex" aria-label="Breadcrumb" style="background-color: var(--bg-secondary);">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                    <li class="inline-flex items-center">
+                        <a href="index.html" class="text-base font-medium transition-colors duration-200 hover:text-yellow-500" style="color: var(--text-secondary);" data-translate="nav.home">
+                            Inicio
+                        </a>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center space-x-1.5">
+                            <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" style="color: var(--text-secondary);">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/>
+                            </svg>
+                            <span class="text-base font-semibold" style="color: var(--item-migas-activo);" data-translate="nav.whoWeAre">
+                                Nosotros
+                            </span>
+                        </div>
+                    </li>        
+                </ol>
+            </nav>
+        </div>                                  
     </div>
 
     
@@ -475,21 +491,21 @@
                     <img src="./imagenes/Nosotros.png" class="img-nosotros" alt="Foto de nuestro logo">
                 </div>
                 <div class="texto-nosotros" style="text-align: left;">
-                    <h2>Sobre Nosotros</h2>
+                    <h2 data-translate="aboutUs.title" >Sobre Nosotros</h2>
                     
-                    <p style="margin-bottom: 1rem;">
+                    <p style="margin-bottom: 1rem;" data-translate="aboutUs.p1">
                         En D' Ennita, nos dedicamos a ofrecerte la mejor experiencia de compra. Nuestro compromiso es brindarte productos frescos y de calidad, junto con un servicio excepcional.
                     </p>
                     
-                    <p style="margin-bottom: 1rem;">
+                    <p style="margin-bottom: 1rem;" data-translate="aboutUs.p2">
                         Desde nuestra fundación, hemos trabajado arduamente para construir una relación de confianza con nuestros clientes. Creemos en la importancia de la transparencia y la honestidad en cada transacción.
                     </p>
                     
-                    <p style="margin-bottom: 1rem;">
+                    <p style="margin-bottom: 1rem;"data-translate="aboutUs.p3">
                         Nos esforzamos por ser más que un simple supermercado; queremos ser parte de tu comunidad. Por eso, apoyamos iniciativas locales y trabajamos con proveedores de la región para ofrecerte lo mejor.
                     </p>
                     
-                    <p>
+                    <p data-translate="aboutUs.p4">
                         Tu satisfacción es nuestra prioridad. Si tienes alguna pregunta o inquietud, no dudes en contactarnos. Estamos aquí para ayudarte.
                     </p>
                 </div>
@@ -504,32 +520,33 @@
                     <img src="./imagenes/logo.png" alt="Logo del supermercado" class="h-auto w-52">
                 </div>
                 <div class="m-2 flex flex-col text-left text-sm" style="color: var(--text-primary);">
-                    <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Conócenos</h3>
-                    <a href="" class="no-underline mt-2" style="color: var(--text-primary);">Quienes somos</a>
-                    <p class="mt-2" style="color: var(--text-primary);">Email: contacto@ennita.pe</p>
-                    <a href="Contacto.html" class="no-underline mt-2" style="color: var(--text-primary);">Libro de Reclamaciones</a>
+                    <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary);" data-translate="footer.knowUs">Conócenos</h3>
+                    <a href="Nosotros.html" class="no-underline mt-2" style="color: var(--text-primary);" data-translate="footer.whoWeAre">Quienes somos</a>
+                    <p class="mt-2" style="color: var(--text-primary);" data-translate="footer.email"data-translate="footer.email">Email: contacto@ennita.pe</p>
+                    <a href="Contacto.html" class="no-underline mt-2" style="color: var(--text-primary);" data-translate="footer.complaints">Libro de Reclamaciones</a>
                 </div>
                 <div class="m-2 flex flex-col text-left text-sm" style="color: var(--text-primary);">
-                    <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Redes Sociales</h3>
+                    <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary);" data-translate="footer.socialMedia">Redes Sociales</h3>
                     <a href="https://www.facebook.com/" class="no-underline mt-2" style="color: var(--text-primary);">Facebook</a>
                     <a href="https://www.instagram.com/" class="no-underline mt-2" style="color: var(--text-primary);">Instagram</a>
                     <a href="https://x.com/" class="no-underline mt-2" style="color: var(--text-primary);">Twitter</a>
                 </div>
                 <div class="m-2 flex flex-col text-left text-sm" style="color: var(--text-primary);">
-                    <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary);">Ubicación</h3>
-                    <p class="mt-2" style="color: var(--text-primary);">Avenida España 123, Trujillo</p>
-                    <p class="mt-2" style="color: var(--text-primary);">Horario: Lunes a Sábado, 8:00 AM - 9:00 PM</p>
+                    <h3 class="text-lg font-semibold mb-2" style="color: var(--text-primary);" data-translate="footer.location">Ubicación</h3>
+                    <p class="mt-2" style="color: var(--text-primary);" data-translate="footer.address">Avenida España 123, Trujillo</p>
+                    <p class="mt-2" style="color: var(--text-primary);" data-translate="footer.schedule">Horario: Lunes a Sábado, 8:00 AM - 9:00 PM</p>
                 </div>
             </div>
         </div>
         <div class="text-white text-center p-5 relative w-full" style="background-color: var(--color-header);">
-            <p class="text-white">&copy; 2025 Supermercado - Todos los derechos reservados</p>
+            <p class="text-white" data-translate="footer.rights">&copy; 2025 Supermercado - Todos los derechos reservados</p>
             <div class="flex justify-center flex-wrap mt-2 gap-2">
-                <a href="#" class="text-white no-underline hover:underline">Política de privacidad</a>
-                <a href="#" class="text-white no-underline hover:underline">Términos de servicio</a>
+                <a href="#" class="text-white no-underline hover:underline" data-translate="footer.privacy">Política de privacidad</a>
+                <a href="#" class="text-white no-underline hover:underline" data-translate="footer.terms">Términos de servicio</a>
             </div>
         </div>
     </footer>
+    <script src="translations.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

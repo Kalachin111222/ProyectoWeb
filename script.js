@@ -1,8 +1,501 @@
+const translations = {
+  es: {
+    // Header y navegación
+    nav: {
+      menu: "Menú",
+      search: "Buscar productos...",
+      account: "Mi cuenta",
+      cart: "Carrito",
+      home: "Inicio",
+      beers: "Cervezas",
+      liquors: "Licores",
+      food: "Comidas",
+      drinks: "Bebidas",
+      snacks: "Antojos",
+      icecream: "Helados",
+      pantry: "Despensa",
+      whoWeAre: "Quienes somos",
+        categories: "Categorías"
+    },
+    
+    // Categorías en la página principal
+    categories: {
+      beers: "Cervezas",
+      liquors: "Licores",
+      food: "Comidas",
+      drinks: "Bebidas",
+      snacks: "Antojos",
+      icecream: "Helados",
+      pantry: "Despensa",
+      seeMore: "Ver más"
+    },
+    
+    // Footer
+    footer: {
+      knowUs: "Conócenos",
+      whoWeAre: "Quienes somos",
+      email: "Email: contacto@ennita.pe",
+      complaints: "Libro de Reclamaciones",
+      socialMedia: "Redes Sociales",
+      location: "Ubicación",
+      address: "Avenida España 123, Trujillo",
+      schedule: "Horario: Lunes a Sábado, 8:00 AM - 9:00 PM",
+      rights: "© 2025 Supermercado - Todos los derechos reservados",
+      privacy: "Política de privacidad",
+      terms: "Términos de servicio"
+    },
+    
+    // Cuenta
+    account: {
+      title: "Mi Cuenta",
+      user: "Usuario",
+      memberSince: "Miembro desde hoy",
+      language: "Idioma",
+      selectLanguage: "Selecciona tu idioma preferido",
+      languageHelp: "El idioma se aplicará en todo el sitio automáticamente",
+      saved: "✓ Cambios guardados correctamente",
+      accountInfo: "Información de la Cuenta",
+      username: "Usuario:",
+      status: "Estado:",
+      active: "Activo",
+      lastAccess: "Último acceso:",
+      statistics: "Estadísticas",
+      productsInCart: "Productos en carrito",
+      cartTotal: "Total en carrito",
+      activeSessions: "Sesiones activas",
+      accountActions: "Acciones de Cuenta",
+      viewCart: "Ver Carrito",
+      clearData: "Limpiar Datos",
+      exportData: "Exportar Datos",
+      darkMode: "Modo Oscuro",
+      lightMode: "Modo Claro",
+      settings: "Configuración",
+      rememberCart: "Recordar productos en carrito",
+      autoTheme: "Tema automático según hora del día",
+      logout: "Cerrar Sesión"
+    },
+
+    aboutUs: {
+      title: "Sobre Nosotros",
+      p1: "En D' Ennita, nos dedicamos a ofrecerte la mejor experiencia de compra. Nuestro compromiso es brindarte productos frescos y de calidad, junto con un servicio excepcional.",
+      p2: "Desde nuestra fundación, hemos trabajado arduamente para construir una relación de confianza con nuestros clientes. Creemos en la importancia de la transparencia y la honestidad en cada transacción.",
+      p3: "Nos esforzamos por ser más que un simple supermercado; queremos ser parte de tu comunidad. Por eso, apoyamos iniciativas locales y trabajamos con proveedores de la región para ofrecerte lo mejor.",
+      p4: "Tu satisfacción es nuestra prioridad. Si tienes alguna pregunta o inquietud, no dudes en contactarnos. Estamos aquí para ayudarte."
+    },
+    complaints: {
+      title: "Libro de Reclamaciones",
+      legal: "Conforme a lo establecido en el Código de Protección y Defensa del Consumidor",
+      
+      // Sección 1: Datos
+      s1_title: "Datos del Consumidor",
+      name: "Nombre Completo *",
+      lastname: "Apellidos *",
+      doc_type: "Tipo de Documento *",
+      doc_num: "Número de Documento *",
+      address: "Dirección *",
+      email: "Correo Electrónico *",
+      phone: "Teléfono / Celular *",
+      department: "Departamento *",
+      province: "Provincia *",
+
+      // Sección 2: Bien Contratado
+      s2_title: "Identificación del Bien Contratado",
+      good_type: "Tipo de Bien *",
+      radio_prod: "Producto",
+      radio_serv: "Servicio",
+      desc_label: "Descripción del Producto/Servicio *",
+      amount_label: "Monto Reclamado (S/) *",
+      date_label: "Fecha de Compra *",
+
+      // Sección 3: Detalle
+      s3_title: "Detalle de la Reclamación o Queja",
+      type_label: "Tipo *",
+      
+      radio_claim_title: "RECLAMO",
+      radio_claim_desc: "Disconformidad relacionada a los productos o servicios",
+      
+      radio_complaint_title: "QUEJA",
+      radio_complaint_desc: "Disconformidad no relacionada a los productos o servicios",
+      
+      detail_label: "Detalle del Reclamo/Queja *",
+      request_label: "Pedido del Consumidor *",
+
+      // Sección 4 y Final
+      s4_title: "Observaciones y Acciones Adoptadas",
+      terms: "Declaro bajo juramento que la información proporcionada es verdadera y autorizo el uso de mis datos personales para el trámite de mi reclamo.",
+      
+      submit_claim: "Enviar Reclamo",
+      reset_form: "Limpiar Formulario",
+
+      title: "Información Importante:",
+      disclaimer_indecopi: "La formulación del reclamo no impide acudir a otras vías de solución de controversias ni es requisito previo para interponer una denuncia ante el INDECOPI.",
+      response_deadline: "El proveedor debe dar respuesta al reclamo en un plazo no mayor a treinta (30) días calendario.",
+      required_fields_note: "Los campos marcados con (*) son obligatorios."
+    
+    },
+    cartPage: {
+      title: "Mi Carrito de Compras",
+      total: "Total:",
+      emptyCart: "Vaciar Carrito",
+      continueShopping: "Continuar Comprando",
+      checkout: "Proceder al Pago", // Opcional, por si lo agregas luego
+      emptyMessage: "Tu carrito está vacío" // Mensaje útil para JS
+    }
+    
+  },
+  
+  en: {
+    // Header and navigation
+    nav: {
+      menu: "Menu",
+      search: "Search products...",
+      account: "My account",
+      cart: "Cart",
+      home: "Home",
+      beers: "Beers",
+      liquors: "Liquors",
+      food: "Food",
+      drinks: "Drinks",
+      snacks: "Snacks",
+      icecream: "Ice Cream",
+      pantry: "Pantry",
+      whoWeAre: "Who we are",
+      categories: "Categories"
+    },
+    
+    // Categories on main page
+    categories: {
+      beers: "Beers",
+      liquors: "Liquors",
+      food: "Food",
+      drinks: "Drinks",
+      snacks: "Snacks",
+      icecream: "Ice Cream",
+      pantry: "Pantry",
+      seeMore: "See more"
+    },
+    
+    // Footer
+    footer: {
+      knowUs: "About Us",
+      whoWeAre: "Who we are",
+      email: "Email: contacto@ennita.pe",
+      complaints: "Complaints Book",
+      socialMedia: "Social Media",
+      location: "Location",
+      address: "España Avenue 123, Trujillo",
+      schedule: "Hours: Monday to Saturday, 8:00 AM - 9:00 PM",
+      rights: "© 2025 Supermarket - All rights reserved",
+      privacy: "Privacy Policy",
+      terms: "Terms of Service"
+    },
+    
+    // Account
+    account: {
+      title: "My Account",
+      user: "User",
+      memberSince: "Member since today",
+      language: "Language",
+      selectLanguage: "Select your preferred language",
+      languageHelp: "The language will be applied throughout the site automatically",
+      saved: "✓ Changes saved successfully",
+      accountInfo: "Account Information",
+      username: "Username:",
+      status: "Status:",
+      active: "Active",
+      lastAccess: "Last access:",
+      statistics: "Statistics",
+      productsInCart: "Products in cart",
+      cartTotal: "Cart total",
+      activeSessions: "Active sessions",
+      accountActions: "Account Actions",
+      viewCart: "View Cart",
+      clearData: "Clear Data",
+      exportData: "Export Data",
+      darkMode: "Dark Mode",
+      lightMode: "Light Mode",
+      settings: "Settings",
+      rememberCart: "Remember cart products",
+      autoTheme: "Automatic theme based on time of day",
+      logout: "Logout"
+    },
+    aboutUs: {
+      title: "About Us",
+      p1: "At D' Ennita, we are dedicated to offering you the best shopping experience. Our commitment is to provide fresh, quality products along with exceptional service.",
+      p2: "Since our founding, we have worked hard to build a relationship of trust with our customers. We believe in the importance of transparency and honesty in every transaction.",
+      p3: "We strive to be more than just a supermarket; we want to be part of your community. That's why we support local initiatives and work with regional suppliers to offer you the best.",
+      p4: "Your satisfaction is our priority. If you have any questions or concerns, please do not hesitate to contact us. We are here to help."
+    },
+
+    complaints: {
+      title: "Complaints Book",
+      legal: "In accordance with the Consumer Protection and Defense Code",
+      
+      s1_title: "Consumer Details",
+      name: "Full Name *",
+      lastname: "Last Name *",
+      doc_type: "Document Type *",
+      doc_num: "Document Number *",
+      address: "Address *",
+      email: "Email Address *",
+      phone: "Phone / Mobile *",
+      department: "Region/State *",
+      province: "Province/City *",
+
+      s2_title: "Identification of the Contracted Good",
+      good_type: "Type of Good *",
+      radio_prod: "Product",
+      radio_serv: "Service",
+      desc_label: "Description of Product/Service *",
+      amount_label: "Claimed Amount (S/) *",
+      date_label: "Purchase Date *",
+
+      s3_title: "Detail of the Claim or Complaint",
+      type_label: "Type *",
+      
+      radio_claim_title: "CLAIM",
+      radio_claim_desc: "Dissatisfaction related to the products or services",
+      
+      radio_complaint_title: "COMPLAINT",
+      radio_complaint_desc: "Dissatisfaction not related to the products or services (e.g., attention)",
+      
+      detail_label: "Detail of the Claim/Complaint *",
+      request_label: "Consumer Request *",
+
+      s4_title: "Observations and Actions Taken",
+      terms: "I declare under oath that the information provided is true and I authorize the use of my personal data for the processing of my claim.",
+
+      submit_claim: "Submit Claim",
+      reset_form: "Clear Form",
+
+      title: "Important Information:",
+      disclaimer_indecopi: "Filing this claim does not prevent resorting to other dispute resolution methods, nor is it a prerequisite for filing a complaint with INDECOPI.",
+      response_deadline: "The provider must respond to the claim within a period of no more than thirty (30) calendar days.",
+      required_fields_note: "Fields marked with (*) are mandatory."
+    },
+    cartPage: {
+      title: "My Shopping Cart",
+      total: "Total:",
+      emptyCart: "Empty Cart",
+      continueShopping: "Continue Shopping",
+      checkout: "Checkout",
+      emptyMessage: "Your cart is empty"
+    }
+  },
+  
+  pt: {
+    // Cabeçalho e navegação
+    nav: {
+      menu: "Menu",
+      search: "Buscar produtos...",
+      account: "Minha conta",
+      cart: "Carrinho",
+      home: "Início",
+      beers: "Cervejas",
+      liquors: "Licores",
+      food: "Comidas",
+      drinks: "Bebidas",
+      snacks: "Lanches",
+      icecream: "Sorvetes",
+      pantry: "Despensa",
+      whoWeAre: "Quem somos",
+        categories: "Categorias"
+    },
+    
+    // Categorias na página principal
+    categories: {
+      beers: "Cervejas",
+      liquors: "Licores",
+      food: "Comidas",
+      drinks: "Bebidas",
+      snacks: "Lanches",
+      icecream: "Sorvetes",
+      pantry: "Despensa",
+      seeMore: "Ver mais"
+    },
+    
+    // Rodapé
+    footer: {
+      knowUs: "Conheça-nos",
+      whoWeAre: "Quem somos",
+      email: "Email: contacto@ennita.pe",
+      complaints: "Livro de Reclamações",
+      socialMedia: "Redes Sociais",
+      location: "Localização",
+      address: "Avenida España 123, Trujillo",
+      schedule: "Horário: Segunda a Sábado, 8:00 - 21:00",
+      rights: "© 2025 Supermercado - Todos os direitos reservados",
+      privacy: "Política de Privacidade",
+      terms: "Termos de Serviço"
+    },
+    
+    // Conta
+    account: {
+      title: "Minha Conta",
+      user: "Usuário",
+      memberSince: "Membro desde hoje",
+      language: "Idioma",
+      selectLanguage: "Selecione seu idioma preferido",
+      languageHelp: "O idioma será aplicado em todo o site automaticamente",
+      saved: "✓ Alterações salvas com sucesso",
+      accountInfo: "Informações da Conta",
+      username: "Usuário:",
+      status: "Status:",
+      active: "Ativo",
+      lastAccess: "Último acesso:",
+      statistics: "Estatísticas",
+      productsInCart: "Produtos no carrinho",
+      cartTotal: "Total no carrinho",
+      activeSessions: "Sessões ativas",
+      accountActions: "Ações da Conta",
+      viewCart: "Ver Carrinho",
+      clearData: "Limpar Dados",
+      exportData: "Exportar Dados",
+      darkMode: "Modo Escuro",
+      lightMode: "Modo Claro",
+      settings: "Configurações",
+      rememberCart: "Lembrar produtos no carrinho",
+      autoTheme: "Tema automático baseado na hora do dia",
+      logout: "Sair"
+    },
+    aboutUs: {
+      title: "Sobre Nós",
+      p1: "No D' Ennita, dedicamo-nos a oferecer-lhe a melhor experiência de compra. O nosso compromisso é fornecer produtos frescos e de qualidade, juntamente com um serviço excecional.",
+      p2: "Desde a nossa fundação, trabalhamos arduamente para construir uma relação de confiança com os nossos clientes. Acreditamos na importância da transparência e honestidade em cada transação.",
+      p3: "Esforçamo-nos para ser mais do que um simples supermercado; queremos fazer parte da sua comunidade. É por isso que apoiamos iniciativas locais e trabalhamos com fornecedores regionais para lhe oferecer o melhor.",
+      p4: "A sua satisfação é a nossa prioridade. Se tiver alguma dúvida ou preocupação, não hesite em contactar-nos. Estamos aqui para ajudar."
+    },
+
+    complaints: {
+      title: "Livro de Reclamações",
+      legal: "Em conformidade com o Código de Proteção e Defesa do Consumidor",
+      
+      s1_title: "Dados do Consumidor",
+      name: "Nome Completo *",
+      lastname: "Sobrenome *",
+      doc_type: "Tipo de Documento *",
+      doc_num: "Número do Documento *",
+      address: "Endereço *",
+      email: "E-mail *",
+      phone: "Telefone / Celular *",
+      department: "Departamento/Estado *",
+      province: "Província/Cidade *",
+
+      s2_title: "Identificação do Bem Contratado",
+      good_type: "Tipo de Bem *",
+      radio_prod: "Produto",
+      radio_serv: "Serviço",
+      desc_label: "Descrição do Produto/Serviço *",
+      amount_label: "Valor Reclamado (S/) *",
+      date_label: "Data da Compra *",
+
+      s3_title: "Detalhe da Reclamação ou Queixa",
+      type_label: "Tipo *",
+      
+      radio_claim_title: "RECLAMAÇÃO",
+      radio_claim_desc: "Descontentamento relacionado aos produtos ou serviços",
+      
+      radio_complaint_title: "QUEIXA",
+      radio_complaint_desc: "Descontentamento não relacionado aos produtos ou serviços",
+      
+      detail_label: "Detalhe da Reclamação/Queixa *",
+      request_label: "Pedido do Consumidor *",
+
+      s4_title: "Observações e Ações Adotadas",
+      terms: "Declaro sob juramento que as informações fornecidas são verdadeiras e autorizo o uso dos meus dados pessoais para o processamento da minha reclamação.",
+
+      submit_claim: "Enviar Reclamação",
+      reset_form: "Limpar Formulário",
+
+      title: "Informações Importantes:",
+      disclaimer_indecopi: "A apresentação da reclamação não impede o recurso a outras vias de resolução de disputas, nem é um pré-requisito para apresentar uma denúncia ao INDECOPI.",
+      response_deadline: "O fornecedor deve responder à reclamação num prazo não superior a trinta (30) dias corridos.",
+      required_fields_note: "Os campos marcados com (*) são obrigatórios."
+    },
+    
+    cartPage: {
+      title: "Meu Carrinho de Compras",
+      total: "Total:",
+      emptyCart: "Esvaziar Carrinho",
+      continueShopping: "Continuar Comprando",
+      checkout: "Finalizar Compra",
+      emptyMessage: "Seu carrinho está vazio"
+    }
+  }
+};
+
+// Función para obtener traducción por clave
+function getTranslation(lang, key) {
+  const keys = key.split('.');
+  let translation = translations[lang];
+  
+  for (let k of keys) {
+    if (translation && translation[k]) {
+      translation = translation[k];
+    } else {
+      return key; // Retorna la clave si no encuentra traducción
+    }
+  }
+  
+  return translation;
+}
+
+// Función para aplicar traducciones a la página
+function applyTranslations(lang) {
+  const elements = document.querySelectorAll('[data-translate]');
+  
+  elements.forEach(element => {
+    const key = element.getAttribute('data-translate');
+    const translation = getTranslation(lang, key);
+    
+    if (translation && translation !== key) {
+      // Si es un input, traducir el placeholder
+      if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
+        element.placeholder = translation;
+      } else {
+        element.textContent = translation;
+      }
+    }
+  });
+  
+  // Actualizar el atributo lang del HTML
+  document.documentElement.lang = lang;
+}
+
+// Cargar idioma guardado al iniciar
+document.addEventListener('DOMContentLoaded', function() {
+  const savedLang = localStorage.getItem('userLanguage') || 'es';
+  applyTranslations(savedLang);
+  
+  // Si existe selector de idioma en la página, establecer su valor
+  const langSelector = document.getElementById('languageSelector');
+  if (langSelector) {
+    langSelector.value = savedLang;
+  }
+});
+
+// Función para cambiar idioma (se llama desde cuenta.html)
+function changeLanguage(lang) {
+  localStorage.setItem('userLanguage', lang);
+  applyTranslations(lang);
+  
+  // Mostrar mensaje de confirmación
+  const savedMsg = document.getElementById('languageSavedMessage');
+  if (savedMsg) {
+    savedMsg.classList.remove('hidden');
+    setTimeout(() => {
+      savedMsg.classList.add('hidden');
+    }, 3000);
+  }
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     new DarkModeToggle();
     new ConnectionMonitor();
     initializeAnimations();
     initializeSmoothScrolling();
+    new ClaimsFormManager();
     try {
         const carousel = new EnhancedCarousel();
         
@@ -44,6 +537,102 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Error inicializando la aplicación:', error);
     }
 });
+
+class ClaimsFormManager {
+    constructor() {
+        this.form = document.getElementById('reclamacionForm');
+        
+        // GUARDIA: Si no estamos en la página de Contacto, paramos aquí para no dar error.
+        if (!this.form) return;
+
+        this.toggles = document.querySelectorAll('.seccion-toggle');
+        this.resetBtn = this.form.querySelector('button[type="reset"]');
+        
+        // Iniciamos la lógica
+        this.init();
+    }
+
+    init() {
+        this.setupAccordion();
+        this.expandFirstSection();
+        this.setupFormHandlers();
+    }
+
+    setupAccordion() {
+        this.toggles.forEach(button => {
+            button.addEventListener('click', (e) => {
+                // Usamos e.currentTarget para referirnos al botón, no al ícono clickeado
+                const btn = e.currentTarget;
+                const sectionId = btn.getAttribute('data-seccion');
+                const content = document.getElementById(sectionId);
+                const icon = btn.querySelector('.icono-toggle');
+
+                if (content && icon) {
+                    content.classList.toggle('hidden');
+                    const isHidden = content.classList.contains('hidden');
+                    // Rotamos el ícono
+                    icon.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+                }
+            });
+        });
+    }
+
+    expandFirstSection() {
+        // Lógica para abrir siempre la primera sección al cargar
+        const firstSectionId = 'seccion1';
+        const firstSection = document.getElementById(firstSectionId);
+        const firstIcon = document.querySelector(`[data-seccion="${firstSectionId}"] .icono-toggle`);
+
+        if (firstSection) {
+            firstSection.classList.remove('hidden');
+            if (firstIcon) {
+                firstIcon.style.transform = 'rotate(180deg)';
+            }
+        }
+    }
+
+    setupFormHandlers() {
+        // 1. Manejo del ENVÍO
+        this.form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Aquí iría tu lógica de conexión con el backend o traducción
+            alert('¡Reclamo enviado exitosamente! Recibirá una respuesta en un plazo máximo de 30 días calendario.');
+            
+            this.form.reset();
+            
+            // Esperamos un poco para cerrar las secciones visualmente
+            setTimeout(() => this.resetSectionsVisibility(), 50);
+        });
+
+        // 2. Manejo del RESET (Limpiar)
+        if (this.resetBtn) {
+            this.resetBtn.addEventListener('click', () => {
+                // Timeout para permitir que el form se limpie nativamente antes de colapsar
+                setTimeout(() => {
+                    this.resetSectionsVisibility();
+                }, 100);
+            });
+        }
+    }
+
+    resetSectionsVisibility() {
+        // Cerrar todas las secciones excepto la primera
+        document.querySelectorAll('.seccion-contenido').forEach((content, index) => {
+            const icon = document.querySelector(`[data-seccion="${content.id}"] .icono-toggle`);
+            
+            if (index === 0) {
+                // La primera se queda abierta
+                content.classList.remove('hidden');
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            } else {
+                // Las demás se cierran
+                content.classList.add('hidden');
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            }
+        });
+    }
+}
 
 class EnhancedCarousel {
     constructor() {
@@ -716,7 +1305,6 @@ class ConnectionMonitor {
         if (searchButton) searchButton.disabled = false;
         if (searchInput) {
             searchInput.disabled = false;
-            searchInput.placeholder = '  Buscar productos...';
         }
         
         const addButtons = document.querySelectorAll('.button-add');

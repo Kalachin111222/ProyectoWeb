@@ -366,7 +366,7 @@ main .texto-nosotros {
 
 main .texto-nosotros h2 {
     font-size: 24px;
-    color: #0d47a1;
+    color: var(--text-producto);
     margin-bottom: 20px;
 }
 
